@@ -13,3 +13,61 @@ body {
     padding-top: 56px;
   }
 }
+.panel-profile > .row
+{
+  padding-bottom: 30px;
+}
+.profile-item {
+  position: relative;
+  padding: 0 0 0 70px;
+  text-transform: none;
+  display:block;
+}
+
+.profile-item > a {
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  font-size: 14pt;
+}
+
+.profile-item > a:first-child:before {
+  font-family: "FontAwesome";
+  display: inline-block;
+  font-size: 55px;
+  line-height: 18px;
+  padding: 20px 0 0 0px;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 0;
+}
+
+.profile-item-user > a:first-child:before {
+  content: "\f07a";
+}
+
+.profile-item-orders > a:first-child:before  {
+  content: "\f022";
+}
+
+.profile-item-pwd > a:first-child:before  {
+  content: "\f023";
+}
+
+.profile-item-pwd > a:first-child:before  {
+  content: "\f023";
+  padding: 20px 0 0 10px;
+}
+
+.profile-item-star > a:first-child:before  {
+  content: "\f006";
+}
+
+.profile-item-eye > a:first-child:before  {
+  content: "\f06e";
+}
+
+.block {
+  display:block;
+}

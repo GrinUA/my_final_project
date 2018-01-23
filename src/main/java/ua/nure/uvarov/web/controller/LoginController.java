@@ -5,6 +5,7 @@ import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.services.LoginService;
 import ua.nure.uvarov.services.UserService;
+import ua.nure.uvarov.util.ValidateUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         loginService.setMap(req);
+        req.getSession().getAttribute(Parameters.S_ERRORS);
         req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
@@ -38,10 +40,10 @@ public class LoginController extends HttpServlet {
     }
 
     private void requestHandler(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        HttpSession session = req.getSession();
         User user = loginService.getUser(req);
         UserService userService = (UserService) req.getServletContext().getAttribute(Parameters.USER_SERVICE);
-        Map<String, String> errors = new HashMap<>();
+        ValidateUtil validateUtil = new ValidateUtil();
+        Map<String, String> errors = validateUtil.validateAuthorize(user);
         if (errors.isEmpty()) {
             User userResult = userService.tryToLogIn(user);
             if (userResult != null) {
@@ -52,14 +54,14 @@ public class LoginController extends HttpServlet {
                 //   req.getRequestDispatcher("/main.do").forward(req,resp);
             } else {
                 if (user.isBlocked()) {
-                    errors.put(Parameters.USER_ERR_MESSAGE, "U was blocked");
+                    errors.put(Parameters.BLOCKED, "U was blocked");
                 }
                 req.getSession().setAttribute(Parameters.S_ERRORS, errors);
                 resp.sendRedirect("login.do");
             }
         } else {
             req.getSession().setAttribute(Parameters.S_ERRORS, errors);
-            resp.sendRedirect("login.do");
+            resp.sendRedirect("login.jsp");
         }
     }
 

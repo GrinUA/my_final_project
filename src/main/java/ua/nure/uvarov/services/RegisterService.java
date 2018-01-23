@@ -48,7 +48,7 @@ public class RegisterService {
         UsersBean usersBean = getUserBean(request);
         Map<String, String> errors = new ValidateUtil().validateBean(usersBean);
         if (userService.isExist(usersBean.getEmail())) {
-            errors.put(Parameters.USER_ERR_MESSAGE, Messages.CANNOT_CREATE_USER);
+            errors.put(Parameters.ERRORS_REGISTER, Messages.CANNOT_CREATE_USER);
         }
         return errors;
     }

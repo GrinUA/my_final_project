@@ -25,12 +25,10 @@ public class ValidateUtil {
     public Map<String, String> validateAuthorize(User user) {
         Map<String, String> errors = new HashMap<>();
         if (!validateByRegex(user.getEmail(), Regexes.EMAIL_PATTERN)) {
-            errors.put(Parameters.EMAIL, Messages.INVALID_EMAIL);
-            System.out.println("login err" + user.getEmail());
+            errors.put(Parameters.S_ERRORS, Messages.INVALID_EMAIL);
         }
         if (!validateByRegex(user.getPassword(), Regexes.PASSWORD)) {
-            errors.put(Parameters.PASSWORD, Messages.INVALID_PASSWORD);
-            System.out.println("password err");
+            errors.put(Parameters.S_ERRORS, Messages.INVALID_PASSWORD);
         }
         return errors;
     }
@@ -49,12 +47,6 @@ public class ValidateUtil {
             }
         } else {
             errors.put(Parameters.PASSWORD_REPEAT, Messages.PASSWORD_NOT_EQUALS);
-        }
-        if (!validateByRegex(usersBean.getFirstName(), Regexes.NAME_PATTERN)) {
-            errors.put(Parameters.FIRST_NAME, Messages.INVALID_FIRST_NAME);
-        }
-        if (!validateByRegex(usersBean.getLastName(), Regexes.NAME_PATTERN)) {
-            errors.put(Parameters.LAST_NAME, Messages.INVALID_LAST_NAME);
         }
 
         return errors;

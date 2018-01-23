@@ -20,11 +20,17 @@
                 <h3 style="color: green;">${sessionScope.success_message}</h3>
             </c:otherwise>
         </c:choose>
-
-        <input name="email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <c:if test="${not empty sessionScope.s_errors}"><a>Wrong email or password</a></c:if>
+        <c:if test="${not empty sessionScope.blocked}"><a>${sessionScope.blocked}</a></c:if>
+        <input name="email" type="text" class="form-control" placeholder="Email address" required="" autofocus="">
+        <c:if test="${not empty sessionScope.s_errors.email}"><a>${sessionScope.s_errors.email}</a></c:if>
         <input name="password" type="password" class="form-control" placeholder="Password" required="">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
     </form>
+
+
+    <c:remove var="s_errors" scope="session"/>
     <c:remove var="success_message" scope="session"/>
 </div> <!-- /container -->
 

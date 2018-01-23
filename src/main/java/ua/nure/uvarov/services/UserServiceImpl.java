@@ -10,7 +10,6 @@ import ua.nure.uvarov.transaction.DBManager;
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private DBManager dbManager;
-    private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl(UserDao userDao, DBManager dbManager) {
         this.userDao = userDao;
@@ -72,7 +71,6 @@ public class UserServiceImpl implements UserService {
         return dbManager.execute(() -> {
             if (userDao.isExist(userBean.getEmail())) {
                 User user = userDao.getUserByEmail(userBean.getEmail());
-                LOG.debug(user);
                 if (user != null) {
                     if (!user.isBlocked()) {
                         userBean.setPassword(userBean.getPassword());
