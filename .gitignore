@@ -1,0 +1,15 @@
+.idea/
+target/
+*.apk
+*.ap_
+*.dex
+*.class
+**/bin/
+**/gen/
+.gradle/
+build/
+local.properties
+**/proguard/
+*.log
+*.iml
+lib/
