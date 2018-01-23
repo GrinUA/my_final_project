@@ -38,7 +38,7 @@ public class BookList extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-       bookService = (BookService) config.getServletContext().getAttribute(Parameters.PRODUCT_SERVICE);
+       bookService = (BookService) config.getServletContext().getAttribute(Parameters.BOOK_SERVICE);
         validateUtil = new ValidateUtil();
 
     }

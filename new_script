@@ -1,0 +1,72 @@
+CREATE TABLE book_groups
+(
+    id INTEGER DEFAULT nextval('book_groups_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    name VARCHAR(45),
+    author VARCHAR(45),
+    edition VARCHAR(45),
+    publicationdate DATE,
+    genreid INTEGER,
+    price DOUBLE PRECISION,
+    CONSTRAINT book_groups___fk1 FOREIGN KEY (genreid) REFERENCES genres (id)
+);
+CREATE TABLE books
+(
+    id INTEGER DEFAULT nextval('books_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    groupid INTEGER NOT NULL,
+    unavailable BOOLEAN DEFAULT true,
+    CONSTRAINT fk_books_book_groups1 FOREIGN KEY (groupid) REFERENCES book_groups (id)
+);
+CREATE TABLE genres
+(
+    id INTEGER DEFAULT nextval('genres_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    name VARCHAR(45) NOT NULL
+);
+CREATE TABLE orders
+(
+    id INTEGER DEFAULT nextval('orders_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    bookid INTEGER NOT NULL,
+    userid INTEGER NOT NULL,
+    date_borrow DATE,
+    date_expected DATE,
+    date_actual DATE,
+    place INTEGER NOT NULL,
+    status VARCHAR(45) DEFAULT 0 NOT NULL,
+    CONSTRAINT fk_orders_books1 FOREIGN KEY (bookid) REFERENCES books (id),
+    CONSTRAINT fk_borrows_users1 FOREIGN KEY (userid) REFERENCES users (id)
+);
+CREATE TABLE penalty
+(
+    id INTEGER DEFAULT nextval('penalty_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    desription VARCHAR(50) NOT NULL,
+    percent DOUBLE PRECISION
+);
+CREATE TABLE penalty_has_orders
+(
+    id INTEGER PRIMARY KEY NOT NULL,
+    penalty_id INTEGER NOT NULL,
+    orders_id INTEGER NOT NULL,
+    debt DOUBLE PRECISION DEFAULT 0 NOT NULL,
+    date DATE NOT NULL,
+    CONSTRAINT fk_penalty_has_orders_penalty1 FOREIGN KEY (penalty_id) REFERENCES penalty (id),
+    CONSTRAINT fk_penalty_has_orders_orders1 FOREIGN KEY (orders_id) REFERENCES orders (id)
+);
+CREATE TABLE raiting
+(
+    id INTEGER DEFAULT nextval('raiting_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    userid INTEGER,
+    bookgroupid INTEGER,
+    value INTEGER DEFAULT 0,
+    CONSTRAINT raiting___fk1 FOREIGN KEY (userid) REFERENCES users (id),
+    CONSTRAINT raiting___fk2 FOREIGN KEY (bookgroupid) REFERENCES book_groups (id)
+);
+CREATE TABLE users
+(
+    id INTEGER DEFAULT nextval('users_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    lastname VARCHAR(45) NOT NULL,
+    firstname VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    password VARCHAR(45) NOT NULL,
+    blocked INTEGER DEFAULT 0 NOT NULL,
+    role VARCHAR(25) DEFAULT 0 NOT NULL
+);
+CREATE UNIQUE INDEX users_email_key ON users (email);

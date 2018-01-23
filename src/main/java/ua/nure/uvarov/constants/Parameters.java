@@ -4,7 +4,8 @@ public class Parameters {
     public static final String USER_SERVICE = "userService";
     public static final String ID = "id";
     public static final String REGISTER_SERVICE ="registerService";
-    public static final String PRODUCT_SERVICE = "productService";
+    public static final String BOOK_SERVICE = "bookService";
+    public static final String ORDER_SERVICE = "orderService";
 
     public static final String USER = "user";
     public static final String PASSWORD = "password";
@@ -44,4 +45,12 @@ public class Parameters {
 
     public static final String S_USER = "s_user";
     public static final String USER_ERR_MESSAGE = "userErrorMessage";
+
+
+    public static final String PRICE = "price";
+    public static final String GUID = "guid";
+
+    public static final String BOOK_GROUP_LIST = "bookGroups";
+    public static final String GROUP_ID = "groupId";
+
 }

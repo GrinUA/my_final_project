@@ -17,11 +17,14 @@ import java.util.Map;
 
 @WebServlet("/register.do")
 public class RegisterController extends HttpServlet {
+    private RegisterService registrationService;
+    private UserService userService;
 
-    /**
-     *
-     */
-
+    @Override
+    public void init() throws ServletException {
+        registrationService = new RegisterService();
+        userService = (UserService) getServletContext().getAttribute(Parameters.USER_SERVICE);;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,9 +36,7 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RegisterService registrationService = (RegisterService) req.getServletContext().getAttribute(Parameters.REGISTER_SERVICE);
         HttpSession session = req.getSession();
-        UserService userService = (UserService) req.getServletContext().getAttribute(Parameters.USER_SERVICE);
         Map<String, String> errors = registrationService.getErrorMap(req,userService);
         if (errors.isEmpty()) {
             User user = registrationService.getUser(req);

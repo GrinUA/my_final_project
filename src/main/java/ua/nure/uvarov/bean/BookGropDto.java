@@ -1,23 +1,14 @@
-package ua.nure.uvarov.entity;
+package ua.nure.uvarov.bean;
 
 import java.util.Date;
 
-public class BookGroup {
-    private int id;
+public class BookGropDto {
     private String name;
     private String author;
     private String edition;
     private Date publicationDate;
-    private int genreId;
     private double price;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String guid;
 
     public String getName() {
         return name;
@@ -51,19 +42,19 @@ public class BookGroup {
         this.publicationDate = publicationDate;
     }
 
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
-
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 }

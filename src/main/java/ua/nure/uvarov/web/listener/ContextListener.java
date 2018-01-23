@@ -1,4 +1,5 @@
 package ua.nure.uvarov.web.listener;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -7,15 +8,20 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import ua.nure.uvarov.constants.Parameters;
+import ua.nure.uvarov.dao.BookDao;
+import ua.nure.uvarov.dao.BookGroupDao;
+import ua.nure.uvarov.dao.OrderDao;
 import ua.nure.uvarov.dao.UserDao;
+import ua.nure.uvarov.dao.mysql.BookDaoImpl;
+import ua.nure.uvarov.dao.mysql.BookGroupDaoImpl;
+import ua.nure.uvarov.dao.mysql.OrderDaoImpl;
 import ua.nure.uvarov.dao.mysql.UserDaoImpl;
 import ua.nure.uvarov.exceptions.AppInitializationException;
-import ua.nure.uvarov.services.RegisterService;
-import ua.nure.uvarov.services.UserService;
-import ua.nure.uvarov.services.UserServiceImpl;
+import ua.nure.uvarov.services.*;
 import ua.nure.uvarov.transaction.DBManager;
 
 
@@ -28,7 +34,7 @@ public class ContextListener implements ServletContextListener {
         DataSource dataSource;
         try {
             Context initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/librarydb");
+            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/library");
         } catch (NamingException e) {
             throw new AppInitializationException();
         }
@@ -37,14 +43,21 @@ public class ContextListener implements ServletContextListener {
 
 
         UserDao userDao = new UserDaoImpl();
+        BookDao bookDao = new BookDaoImpl();
+        OrderDao orderDao = new OrderDaoImpl();
+        BookGroupDao bookGroupDao = new BookGroupDaoImpl();
 
 
-        UserService userService = new UserServiceImpl(userDao,dbManager);
-        RegisterService registerService = new RegisterService();
+        UserService userService = new UserServiceImpl(userDao, dbManager);
+        BookService bookService = new BookServiceImpl(bookDao, bookGroupDao, dbManager);
+        OrderService orderService = new OrderServiceImpl(orderDao, dbManager);
+
 
         servletContext.setAttribute(Parameters.USER_SERVICE, userService);
-        servletContext.setAttribute(Parameters.REGISTER_SERVICE, registerService);
+        servletContext.setAttribute(Parameters.BOOK_SERVICE, bookService);
+        servletContext.setAttribute(Parameters.ORDER_SERVICE, orderService);
     }
+
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
 
     }
