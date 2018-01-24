@@ -14,7 +14,7 @@
                     <c:choose>
                     <c:when test="${not empty sessionScope.s_user}">
                         <li
-                                class="login"><a >${sessionScope.s_user.email}<i class="fa fa-user"></i></a>
+                                class="login"><a>${sessionScope.s_user.email}<i class="fa fa-user"></i></a>
                         </li>
                         <li
                                 class="login"><a href="cabinet.do">Cabinet<i class="fa fa-user"></i></a>
