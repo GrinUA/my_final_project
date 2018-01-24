@@ -12,12 +12,13 @@ import java.io.IOException;
 public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("index.jsp");
+        req.getRequestDispatcher("books.do").include(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("WEB-INF/jsp/index.jsp");
     }
 
     @Override

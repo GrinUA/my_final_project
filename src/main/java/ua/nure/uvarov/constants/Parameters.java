@@ -24,7 +24,7 @@ public class Parameters {
     public static final String EDITION = "edition";
     public static final String PUBLICATION_DATE = "publicationDate";
     public static final String GROUP = "group";
-    public static final String GENRE = "genre";
+    public static final String GENRE = "genreId";
     public static final String UNAVAILABLE = "unavailable";
 
     public static final String BOOK_ID = "bookid";
@@ -49,6 +49,7 @@ public class Parameters {
 
 
     public static final String PRICE = "price";
+    public static final String DESCRIPTION = "description";
     public static final String GUID = "guid";
 
     public static final String BOOK_GROUP_LIST = "bookGroups";
