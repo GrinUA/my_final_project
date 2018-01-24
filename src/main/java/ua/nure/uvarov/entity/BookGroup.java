@@ -3,19 +3,20 @@ package ua.nure.uvarov.entity;
 import java.util.Date;
 
 public class BookGroup {
-    private int id;
+    private String id;
     private String name;
     private String author;
     private String edition;
     private Date publicationDate;
-    private int genreId;
+    private String description;
+    private Genre genre;
     private double price;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,12 +52,12 @@ public class BookGroup {
         this.publicationDate = publicationDate;
     }
 
-    public int getGenreId() {
-        return genreId;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public double getPrice() {
@@ -65,5 +66,13 @@ public class BookGroup {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

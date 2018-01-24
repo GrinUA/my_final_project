@@ -1,19 +1,45 @@
 package ua.nure.uvarov.dao.mysql;
 
+import javafx.util.Pair;
 import ua.nure.uvarov.constants.MySQL;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.dao.BookGroupDao;
 import ua.nure.uvarov.dao.mapper.BookGroupRowMapper;
 import ua.nure.uvarov.entity.Book;
 import ua.nure.uvarov.entity.BookGroup;
+import ua.nure.uvarov.entity.Genre;
 import ua.nure.uvarov.exceptions.DataBaseException;
 import ua.nure.uvarov.transaction.ThreadLockHandler;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class BookGroupDaoImpl implements BookGroupDao {
+
+    private Function<Integer, Genre> genreByIdFunction = genreId -> getGenreById(genreId);
+
+
+    @Override
+    public Genre getGenreById(int id) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_GENRE_BY_ID)) {
+            st.setInt(1, id);
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            resultSet.next();
+
+            Genre genre = new Genre();
+            genre.setId(resultSet.getInt(Parameters.ID));
+            genre.setName(resultSet.getString(Parameters.NAME));
+
+            return genre;
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+    }
+
     @Override
     public BookGroup getById(int id) {
         Connection connection = ThreadLockHandler.getConnection();
@@ -23,7 +49,7 @@ public class BookGroupDaoImpl implements BookGroupDao {
             ResultSet resultSet = st.getResultSet();
             resultSet.next();
 
-            BookGroup bookGroup = new BookGroupRowMapper().mapRow(resultSet);
+            BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
             return bookGroup;
         } catch (SQLException e) {
             throw new DataBaseException(e);
@@ -33,13 +59,10 @@ public class BookGroupDaoImpl implements BookGroupDao {
     @Override
     public int create(BookGroup entity) {
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.CREATE_BOOK_GROUP, Statement.RETURN_GENERATED_KEYS)) {
-            new BookGroupRowMapper().unMap(st,entity);
+        try (PreparedStatement st = connection.prepareStatement(MySQL.CREATE_BOOK_GROUP)) {
+            new BookGroupRowMapper().unMap(st, entity);
             st.executeUpdate();
-            ResultSet resultSet = st.getGeneratedKeys();
-            resultSet.next();
-            entity.setId(resultSet.getInt(1));
-            return entity.getId();
+            return 0;
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
@@ -66,11 +89,7 @@ public class BookGroupDaoImpl implements BookGroupDao {
             ResultSet resultSet = st.getResultSet();
             while (!resultSet.isLast()) {
                 resultSet.next();
-
-                BookGroup bookGroup = new BookGroup();
-                bookGroup.setId(resultSet.getInt(Parameters.ID));
-
-
+                BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
                 list.add(bookGroup);
             }
         } catch (SQLException e) {
@@ -84,15 +103,16 @@ public class BookGroupDaoImpl implements BookGroupDao {
         List<BookGroup> list;
 
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_GENRES)){
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUPS_GENRE)) {
             list = new ArrayList<>();
             st.setInt(1, id);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             while (!resultSet.isLast())
                 resultSet.next();
-            list.add(new BookGroupRowMapper().mapRow(resultSet));
-        } catch (SQLException e){
+            BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
+            list.add(bookGroup);
+        } catch (SQLException e) {
             throw new DataBaseException(e);
         }
         return list;
@@ -102,14 +122,14 @@ public class BookGroupDaoImpl implements BookGroupDao {
     public List<String> getGenres() {
         List<String> list;
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_GENRES)){
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_GENRES)) {
             list = new ArrayList<>();
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             while (!resultSet.isLast())
                 resultSet.next();
             list.add(resultSet.getString(1));
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DataBaseException(e);
         }
         return list;
@@ -119,14 +139,14 @@ public class BookGroupDaoImpl implements BookGroupDao {
     public BookGroup getBookGroupByName(String name) {
         BookGroup bookGroup;
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUPS_BY_NAME)){
-            BookGroupRowMapper bookGroupRowMapper = new BookGroupRowMapper();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUPS_BY_NAME)) {
+            BookGroupRowMapper bookGroupRowMapper = new BookGroupRowMapper(genreByIdFunction);
             st.setString(1, name);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             resultSet.next();
             bookGroup = bookGroupRowMapper.mapRow(resultSet);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DataBaseException(e);
         }
         return bookGroup;
@@ -136,14 +156,14 @@ public class BookGroupDaoImpl implements BookGroupDao {
     public BookGroup getBookGroupByAuthor(String author) {
         BookGroup bookGroup;
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUPS_BY_AUTHOR)){
-            BookGroupRowMapper bookGroupRowMapper = new BookGroupRowMapper();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUPS_BY_AUTHOR)) {
+            BookGroupRowMapper bookGroupRowMapper = new BookGroupRowMapper(genreByIdFunction);
             st.setString(1, author);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             resultSet.next();
             bookGroup = bookGroupRowMapper.mapRow(resultSet);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DataBaseException(e);
         }
         return bookGroup;

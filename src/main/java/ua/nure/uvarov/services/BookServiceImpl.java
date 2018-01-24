@@ -21,8 +21,8 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public List<String> getGroups() {
-        return null;
+    public List<BookGroup> getGroups() {
+        return dbManager.execute(() -> bookGroupDao.getAll());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookByParameters(BookParams bookParams) {
+    public BookGroup getBookByParameters(BookParams bookParams) {
         return null;
     }
 
