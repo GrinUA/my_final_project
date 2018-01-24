@@ -18,10 +18,7 @@ public class BookServiceImpl implements BookService {
         this.dbManager = dbManager;
         this.bookGroupDao = bookGroupDao;
     }
-    @Override
-    public List<String> getGenres() {
-        return dbManager.execute(()->bookDao.getGenres());
-    }
+
 
     @Override
     public List<String> getGroups() {
@@ -38,23 +35,29 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
-    @Override
+   /* @Override
     public BookGroup getBookGroup(int id) {
         return dbManager.execute(() -> bookGroupDao.getById(id));
     }
-
+*/
     @Override
     public int createBookGroup(BookGroup bookGroup) {
         return dbManager.execute(() -> bookGroupDao.create(bookGroup));
     }
 
-    @Override
+   /* @Override
     public BookGroup getBookGroup(String guid) {
         return dbManager.execute(() -> bookGroupDao.getBookGroupByGuid(guid));
-    }
+    }*/
 
     @Override
     public List<BookGroup> getBookGroups() {
         return dbManager.execute(()->bookGroupDao.getAll());
+    }
+
+
+    @Override
+    public BookGroup getBookGroup(String guid) {
+        return null;
     }
 }

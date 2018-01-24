@@ -11,24 +11,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <c:if test="${sessionScope.s_user.role == 'ADMIN'}">
-                            <div class="btn-group">
-                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Inverse <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div><!-- /btn-group -->
-                        </c:if>
-                    </li>
                     <c:choose>
                     <c:when test="${not empty sessionScope.s_user}">
                         <li
-                                class="login"><a href="#">${sessionScope.s_user.email} <i class="fa fa-user"></i></a>
+                                class="login"><a >${sessionScope.s_user.email}<i class="fa fa-user"></i></a>
+                        </li>
+                        <li
+                                class="login"><a href="cabinet.do">Cabinet<i class="fa fa-user"></i></a>
                         </li>
                         <li>
                             <a href="logout.do"><i class="fa fa-lock"></i> LogOut</a>

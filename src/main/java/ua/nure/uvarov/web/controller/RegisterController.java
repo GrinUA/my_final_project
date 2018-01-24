@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/register.do")
@@ -23,12 +22,11 @@ public class RegisterController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         registrationService = new RegisterService();
-        userService = (UserService) getServletContext().getAttribute(Parameters.USER_SERVICE);;
+        userService = (UserService) getServletContext().getAttribute(Parameters.USER_SERVICE);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RegisterService registrationService = (RegisterService) req.getServletContext().getAttribute(Parameters.REGISTER_SERVICE);
         registrationService.setBean(req);
         registrationService.setMap(req);
         req.getRequestDispatcher("/register.jsp").forward(req, resp);

@@ -38,6 +38,7 @@ public class Parameters {
     public static final String S_ERRORS = "s_errors";
     public static final String ERRORS = "errors";
     public static final String ERRORS_LOGIN = "errors_l";
+    public static final String ERRORS_REGISTER = "errors_2";
 
     public static final String BEAN = "bean";
     public static final String S_BEAN = "s_bean";

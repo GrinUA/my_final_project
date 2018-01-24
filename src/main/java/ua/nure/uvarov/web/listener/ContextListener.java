@@ -34,7 +34,7 @@ public class ContextListener implements ServletContextListener {
         DataSource dataSource;
         try {
             Context initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/library");
+            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/librarydb");
         } catch (NamingException e) {
             throw new AppInitializationException();
         }
