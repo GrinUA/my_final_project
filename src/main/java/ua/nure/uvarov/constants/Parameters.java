@@ -51,8 +51,12 @@ public class Parameters {
     public static final String PRICE = "price";
     public static final String DESCRIPTION = "description";
     public static final String GUID = "guid";
+    public static final String IMAGE = "image";
 
     public static final String BOOK_GROUP_LIST = "bookGroups";
     public static final String GROUP_ID = "groupId";
+
+
+    public static final String DEFAULT_IMAGE_VALUE = "default.jpg";
 
 }

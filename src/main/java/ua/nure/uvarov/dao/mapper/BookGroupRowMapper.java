@@ -1,5 +1,7 @@
 package ua.nure.uvarov.dao.mapper;
 
+
+import com.mysql.jdbc.StringUtils;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.Book;
 import ua.nure.uvarov.entity.BookGroup;
@@ -40,6 +42,7 @@ public class BookGroupRowMapper implements EntityRowMapper<BookGroup> {
             genre = new Genre(resultSet.getInt(Parameters.GENRE));
         }
         bookGroup.setGenre(genre);
+        bookGroup.setImage(resultSet.getString(Parameters.IMAGE));
         return bookGroup;
     }
 
@@ -53,6 +56,8 @@ public class BookGroupRowMapper implements EntityRowMapper<BookGroup> {
         preparedStatement.setString(6, book.getDescription());
         preparedStatement.setDouble(7, book.getPrice());
         preparedStatement.setInt(8, book.getGenre().getId());
+        preparedStatement.setString(9,
+                StringUtils.isNullOrEmpty(book.getImage()) ? Parameters.DEFAULT_IMAGE_VALUE : book.getImage());
 
     }
 }

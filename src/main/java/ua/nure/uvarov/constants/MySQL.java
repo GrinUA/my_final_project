@@ -18,7 +18,7 @@ public final class MySQL {
     public static final String FIND_ALL_GENRES = "SELECT * FROM genres";
 
     public static final String CREATE_BOOK_GROUP =
-            "INSERT into book_groups (id,name,author,edition,publicationDate,description, price,genreId) values (?,?,?,?,?,?,?,?)";
+            "INSERT into book_groups (id,name,author,edition,publicationDate,description, price,genreId, image) values (?,?,?,?,?,?,?,?,?)";
     public static final String FIND_BOOK_GROUP_BY_ID = "SELECT * FROM book_groups WHERE id = ?";
     public static final String FIND_ALL_BOOK_GROUP = "SELECT * FROM book_groups";
 

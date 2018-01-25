@@ -4,8 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-  <display-name>Archetype Created Web Application</display-name>
-  <welcome-file-list>
-    <welcome-file>main.do</welcome-file>
-  </welcome-file-list>
+    <display-name>Archetype Created Web Application</display-name>
+    <welcome-file-list>
+        <welcome-file>main.do</welcome-file>
+    </welcome-file-list>
+
+
+    <context-param>
+        <description>Image path</description>
+        <param-name>images_path</param-name>
+        <param-value>/server/file_storage/images</param-value>
+    </context-param>
 </web-app>

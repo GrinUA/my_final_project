@@ -11,6 +11,7 @@ public class BookGroup {
     private String description;
     private Genre genre;
     private double price;
+    private String image;
 
     public String getId() {
         return id;
@@ -74,5 +75,13 @@ public class BookGroup {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

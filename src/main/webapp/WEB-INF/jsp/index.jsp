@@ -34,15 +34,31 @@
                             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image" src="../../imgs/default.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="../../imgs/default.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="../../imgs/default.jpg" alt="">
-                            </div>
+                            <c:forEach var="i" begin="0" end="2">
+                                <c:set var="topBook" scope="page" value="${bookGroups.get(i)}"/>
+
+                                <div class="item <c:if test="${i==0}">active</c:if>">
+                                    <a href="/bookInfo.do?articul=${topBook.id}">
+                                        <div class="row margin-5t-5b-div">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4"><img class="slide-image slide-image-my"
+                                                                       src="/images/${topBook.image}"
+                                                                       alt=""></div>
+                                            <div class="col-md-5">
+                                                <h3>${topBook.name}</h3>
+                                                <p>Author: ${topBook.author}</p>
+                                                <p>Edition: ${topBook.edition} / <fmt:formatDate pattern="MMM yyyy"
+                                                                                                 value="${topBook.publicationDate}"/></p>
+                                                <p>Genre: ${topBook.genre.name}</p>
+                                                <p>${topBook.description}</p>
+
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </c:forEach>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -66,10 +82,11 @@
                                 <div class="thumbnail">
                                     <img src="../../imgs/default.jpg" alt="">
                                     <div class="caption">
-                                        <h4><a href="/">${bookG.name}</a>
+                                        <h4><a href="/bookInfo.do?articul=${bookG.id}">${bookG.name}</a>
                                         </h4>
                                         <p>Author: ${bookG.author}</p>
-                                        <p>Edition: ${bookG.edition} (${bookG.publicationDate})</p>
+                                        <p>Edition: ${bookG.edition} / <fmt:formatDate pattern="MMM yyyy"
+                                                                                      value="${bookG.publicationDate}"/></p>
                                         <p>Genre: ${bookG.genre.name}</p>
                                         <p>${bookG.description}</p>
                                     </div>
