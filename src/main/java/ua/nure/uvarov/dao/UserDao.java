@@ -2,6 +2,8 @@ package ua.nure.uvarov.dao;
 
 import ua.nure.uvarov.entity.User;
 
+import java.util.List;
+
 public interface UserDao extends GenericDao<User> {
     boolean isExist(String email);
 
@@ -12,4 +14,5 @@ public interface UserDao extends GenericDao<User> {
     boolean isBlocked(String email);
 
     boolean changeBlockStatus(String email,boolean blocked);
+    List<User>  getAll();
 }

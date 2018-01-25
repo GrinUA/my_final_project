@@ -23,7 +23,7 @@
                             <li class="list-group-item"><a href="#">Personal data</a></li>
                             <li class="list-group-item"><a href="#">Orders</a></li>
                             <li class="list-group-item"><a href="#">Change password</a></li>
-                            </c:if>
+                        </c:if>
                         <c:if test="${sessionScope.s_user.role == 'ADMIN'}">
                             <li class="list-group-item"><a href="#">Personal data</a></li>
                             <li class="list-group-item"><a href="#">Books</a></li>
@@ -38,87 +38,57 @@
                 </div>
             </div>
         </div>
+        <h2> Welcome to cabinet ${sessionScope.s_user.firstName} ${sessionScope.s_user.lastName}!</h2>
     </div>
     <div class="col-md-9">
         <div class="panel panel-primary">
             <div class="panel-heading">Cabinet</div>
             <div class="panel-body panel-profile">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="profile-item profile-item-user">
-                            <div class="col-md-9">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">Личный кабинет</div>
-                                    <div class="panel-body panel-profile">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="profile-item profile-item-user">
-                                                    <a href="#">
-                                                        <span>Личные данные</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="profile-item profile-item-orders">
-                                                    <small>
-                                                        <c:choose>
-                                                        <c:when test="${not empty productList}">
 
-                                                        <br>
-                                                        <c:forEach items="${productList}" var="product">
-                                                        <div class="col-sm-4">
-                                                            <div class="product-image-wrapper">
-                                                                <div class="single-products">
-                                                                    <div class="productinfo text-center">
-                                                                        <h2>$${product.price}</h2>
-                                                                        <p>${product.name}</p>
-                                                                        <p>${product.manufacturer}</p>
-                                                                        <p>${product.category}</p>
-                                                                        <input type="button" onclick="addToCart(${product.id})"
-                                                                               class="btn btn-default add-to-cart action" value="Add to cart">
-                                                                        <br>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="choose">
-                                                                    <ul class="nav nav-pills nav-justified">
-                                                                        <li><a href=""><i class="fa fa-plus-square"></i>Add
-                                                                            to wishlist</a></li>
-                                                                        <li><a href=""><i class="fa fa-plus-square"></i>Add
-                                                                            to compare</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        </c:forEach>
-                                                </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <h2 class="text-center">Products not found!</h2>
-                                            </div>
+                <small>
+                    <c:choose>
+                        <c:when test="${not empty userList}">
+                            <%--<t:pages />--%>
+                            <br>
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">Users</div>
+
+                                <table class="table">
+                                    <th>Email</th>
+                                    <th>Surname</th>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Block</th>
+
+                                    <c:forEach items="${userList}" var="user">
+                                        <c:choose>
+                                            <c:when test="${user.blocked}">
+                                                <tr class="danger">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <tr class="success">
                                             </c:otherwise>
-                                            </c:choose>
-                                            </small>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </c:choose>
+                                            <td>${user.email}</td>
+                                            <td>${user.lastName}</td>
+                                            <td>${user.firstName}</td>
+                                            <td>${user.role}</td>
+                                            <td>${user.blocked}</td>
+                                        </tr>
 
-
-                                    </div>
-                                </div>
+                                    </c:forEach>
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-item profile-item-orders">
-                            <a href="#">
-                                <span>Заказы</span>
-                            </a>
-                            <small>Информация о всех ваших заказах: номера, даты, состав заказов и их статусы.</small>
-                        </div>
-                    </div>
-                </div>
+                        </c:when>
+                        <c:otherwise>
+                            <h2 class="text-center">Users not found!</h2>
+                        </c:otherwise>
+                    </c:choose>
+                </small>
             </div>
         </div>
     </div>
 </div>
+
 </body>

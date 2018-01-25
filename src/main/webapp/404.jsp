@@ -7,10 +7,16 @@
 <html lang="en">
 <%@ include file="/WEB-INF/jspf/directive/head.jspf"%>
 <body>
-	<div class="container text-center">
-		<div class="content-404">
-			<h1><b>OPPS!</b> page not found :(</h1>
-		</div>
+<!--start-wrap--->
+<div class="wrap">
+	<!--start-content------>
+	<div class="content">
+		<img src="imgs/error-img.png" title="error" />
+		<p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>
+		<a href="main.do">Back To Home</a>
 	</div>
+	<!--End-Cotent------>
+</div>
+<!--End-wrap--->
 </body>
 </html>

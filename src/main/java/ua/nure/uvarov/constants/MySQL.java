@@ -6,6 +6,7 @@ public final class MySQL {
     public static final String USERS_BLOCK_STATUS = "SELECT blocked FROM users WHERE email = ?";
     public static final String UPDATE_BLOCK_STATUS_BY_EMAIL = "UPDATE users SET blocked = ? WHERE email = ?";
     public static final String USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    public static final String FIND_ALL_USERS = "SELECT * FROM users";
 
     public static final String FIND_GENRE_BY_ID = "SELECT * FROM genres WHERE id = ?";
 

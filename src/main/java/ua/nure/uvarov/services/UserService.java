@@ -3,6 +3,8 @@ package ua.nure.uvarov.services;
 
 import ua.nure.uvarov.entity.User;
 
+import java.util.List;
+
 public interface UserService {
 
     boolean isExist(String login);
@@ -22,5 +24,7 @@ public interface UserService {
     boolean block(String login);
 
     User tryToLogIn(User userBean);
+
+    List<User> getAllUsers();
 
 }

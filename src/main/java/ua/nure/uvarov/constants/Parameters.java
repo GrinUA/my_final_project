@@ -18,6 +18,7 @@ public class Parameters {
     public static final String ROLE_UNKNOWN = "unknown";
     public static final String ROLE_CLIENT ="client";
     public static final String ROLE_ADMIN = "admin";
+    public static final String ALL_USERS = "userList";
 
     public static final String NAME = "name";
     public static final String AUTHOR = "author";

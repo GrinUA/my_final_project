@@ -1,10 +1,11 @@
 package ua.nure.uvarov.services;
 
 
-import org.apache.log4j.Logger;
 import ua.nure.uvarov.dao.UserDao;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.transaction.DBManager;
+
+import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
@@ -82,5 +83,10 @@ public class UserServiceImpl implements UserService {
                 }
             return null;
         });
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return dbManager.execute(()->userDao.getAll());
     }
 }

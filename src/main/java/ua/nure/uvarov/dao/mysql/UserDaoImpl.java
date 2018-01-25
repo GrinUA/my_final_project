@@ -8,6 +8,8 @@ import ua.nure.uvarov.exceptions.DataBaseException;
 import ua.nure.uvarov.transaction.ThreadLockHandler;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     public boolean isExist(String email) {
@@ -106,4 +108,22 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    @Override
+    public List<User> getAll() {
+        List<User> list;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_USERS)) {
+            list = new ArrayList<>();
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            while (!resultSet.isLast()) {
+                resultSet.next();
+              User user = new UserRowMapper().mapRow(resultSet);
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return list;
+    }
 }
