@@ -42,7 +42,7 @@
                                         <div class="row margin-5t-5b-div">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-4"><img class="slide-image slide-image-my"
-                                                                       src="/images/${topBook.image}"
+                                                                       src="/images/${topBook.image}?owner=user"
                                                                        alt=""></div>
                                             <div class="col-md-5">
                                                 <h3>${topBook.name}</h3>

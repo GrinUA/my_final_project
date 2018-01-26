@@ -4,6 +4,9 @@ package ua.nure.uvarov.services;
 import ua.nure.uvarov.dao.UserDao;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.transaction.DBManager;
+import ua.nure.uvarov.transaction.Transaction;
+
+import java.sql.SQLException;
 
 import java.util.List;
 
@@ -79,8 +82,8 @@ public class UserServiceImpl implements UserService {
                             return user;
                         }
                     }
-                    }
                 }
+            }
             return null;
         });
     }

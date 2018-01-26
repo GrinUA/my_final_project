@@ -34,7 +34,7 @@ public class ContextListener implements ServletContextListener {
         DataSource dataSource;
         try {
             Context initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/librarydb");
+            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/library");
         } catch (NamingException e) {
             throw new AppInitializationException();
         }
@@ -50,7 +50,7 @@ public class ContextListener implements ServletContextListener {
 
         UserService userService = new UserServiceImpl(userDao, dbManager);
         BookService bookService = new BookServiceImpl(bookDao, bookGroupDao, dbManager);
-        OrderService orderService = new OrderServiceImpl(orderDao, dbManager);
+        OrderService orderService = new OrderServiceImpl(orderDao,bookGroupDao, dbManager);
 
 
         servletContext.setAttribute(Parameters.USER_SERVICE, userService);

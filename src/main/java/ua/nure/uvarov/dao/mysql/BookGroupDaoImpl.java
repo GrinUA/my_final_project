@@ -42,18 +42,7 @@ public class BookGroupDaoImpl implements BookGroupDao {
 
     @Override
     public BookGroup getById(int id) {
-        Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUP_BY_ID)) {
-            st.setInt(1, id);
-            st.executeQuery();
-            ResultSet resultSet = st.getResultSet();
-            resultSet.next();
-
-            BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
-            return bookGroup;
-        } catch (SQLException e) {
-            throw new DataBaseException(e);
-        }
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -167,5 +156,36 @@ public class BookGroupDaoImpl implements BookGroupDao {
             throw new DataBaseException(e);
         }
         return bookGroup;
+    }
+
+    @Override
+    public int getBookCountByState(boolean unavailable) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.COUNT_BOOKS_BY_STATE_UNAVAILABLE)) {
+            st.setBoolean(1, unavailable);
+            // for MySql: st.setInt(1, unavailable? 1 : 0);
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            resultSet.next();
+            return resultSet.getInt(Parameters.COUNT);
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+    }
+
+    @Override
+    public BookGroup getById(String id) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUP_BY_ID)) {
+            st.setString(1, id);
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            resultSet.next();
+
+            BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
+            return bookGroup;
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
     }
 }

@@ -56,8 +56,16 @@ public class Parameters {
 
     public static final String BOOK_GROUP_LIST = "bookGroups";
     public static final String GROUP_ID = "groupId";
+    public static final String COUNT = "count";
 
 
     public static final String DEFAULT_IMAGE_VALUE = "default.jpg";
+
+
+    public static final String ALL_BOOK_COUNT = "allBookCount";
+    public static final String AVAILABLE_BOOK_COUNT = "availableBookCount";
+    public static final String UNAVAILABLE_BOOK_COUNT = "unavailableBookCount";
+    public static final String ORDERED_BOOK_COUNT = "orderedBookCount";
+
 
 }

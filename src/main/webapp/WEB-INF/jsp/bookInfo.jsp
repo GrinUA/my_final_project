@@ -17,33 +17,24 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                        <img class="img-rounded img-responsive" src="/images/${bookInfo.image}?owner=user" alt="">
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>
-                            Bhaumik Patel</h4>
-                        <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
-                        </i></cite></small>
+                        <h4>${bookInfo.name}</h4>
                         <p>
-                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
-                            <br />
-                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                            <br />
-                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+                        <p>Author: ${bookInfo.author}</p>
+                        <p>Edition: ${bookInfo.edition} / <fmt:formatDate pattern="MMM yyyy"
+                                                                         value="${bookInfo.publicationDate}"/></p>
+                        <p>Genre: ${bookInfo.genre.name}</p>
+                        <p>Available: <b style="color: limegreen">${booksData.get("availableBookCount") - booksData.get("orderedBookCount")}</b>/<b>${booksData.get("availableBookCount")}</b></p>
+                        <h3>DESCRIPTION</h3>
+                        <p><i>${bookInfo.description}</i></p>
+                        </p>
                         <!-- Split button -->
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary">
-                                Social</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span><span class="sr-only">Social</span>
+                                Order ->
                             </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
-                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Github</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

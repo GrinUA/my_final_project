@@ -58,6 +58,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookGroup getBookGroup(String guid) {
-        return null;
+        return dbManager.execute(() ->bookGroupDao.getById(guid));
     }
 }

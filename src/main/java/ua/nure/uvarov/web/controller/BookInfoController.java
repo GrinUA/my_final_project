@@ -1,7 +1,10 @@
 package ua.nure.uvarov.web.controller;
 
 import ua.nure.uvarov.constants.Parameters;
+import ua.nure.uvarov.entity.BookGroup;
+import ua.nure.uvarov.exceptions.NotFoundException;
 import ua.nure.uvarov.services.BookService;
+import ua.nure.uvarov.services.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +16,23 @@ import java.io.IOException;
 @WebServlet("/bookInfo.do")
 public class BookInfoController extends HttpServlet {
     private BookService bookService;
+    private OrderService orderService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String bookId = req.getParameter("articul");
+        if(bookId == null || bookId.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+
+        BookGroup bookGroup = bookService.getBookGroup(bookId);
+        if(bookGroup == null){
+            throw new NotFoundException();
+        }
+
+        req.setAttribute("bookInfo", bookGroup);
+        req.setAttribute("booksData", orderService.getDataAboutOrderedBooks(bookGroup.getId()));
+
         req.getRequestDispatcher("WEB-INF/jsp/bookInfo.jsp").forward(req,resp);
         //resp.sendRedirect("WEB-INF/jsp/index.jsp");
     }
@@ -28,6 +45,7 @@ public class BookInfoController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         bookService = (BookService) getServletContext().getAttribute(Parameters.BOOK_SERVICE);
+        orderService = (OrderService) getServletContext().getAttribute(Parameters.ORDER_SERVICE);
     }
 
 }

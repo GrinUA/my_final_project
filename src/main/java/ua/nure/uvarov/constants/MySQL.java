@@ -22,6 +22,12 @@ public final class MySQL {
             "INSERT into book_groups (id,name,author,edition,publicationDate,description, price,genreId, image) values (?,?,?,?,?,?,?,?,?)";
     public static final String FIND_BOOK_GROUP_BY_ID = "SELECT * FROM book_groups WHERE id = ?";
     public static final String FIND_ALL_BOOK_GROUP = "SELECT * FROM book_groups";
+    public static final String COUNT_BOOKS_BY_STATE_UNAVAILABLE = "SELECT COUNT(id) as count FROM books where unavailable = ?";
+
+
+    public static final String COUNT_ORDERS_FOR_BOOK_GROUP = "SELECT count(o.id) as count from books as b INNER JOIN  orders o ON b.id = o.bookid where b.groupid = ?";
+
+
 
 
 
