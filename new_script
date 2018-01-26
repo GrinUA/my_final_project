@@ -70,3 +70,65 @@ CREATE TABLE users
     role VARCHAR(25) DEFAULT 0 NOT NULL
 );
 CREATE UNIQUE INDEX users_email_key ON users (email);
+
+
+
+
+
+
+------ТУТ ПОСМОТРИ ПИДОР-------
+INSERT INTO book_groups (id, price, guid) VALUES (DEFAULT, 50, 'ddad-dadasd-9d9sd9s-dsad')
+SELECT *
+FROM book_groups;
+
+
+INSERT INTO book_groups (id, name, author, edition, publicationdate, description, genreid, price)
+VALUES ('12345678qwer414', 'book', 'Yura', 'Ranok', '12/10/02', 'Good book', 1, 10);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, description, genreid, price)
+VALUES ('12345678qwer1441141', 'book2', 'Yura2', 'Ranok', '12/10/01', 'Good book', 1, 20);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, genreid, description, price)
+VALUES ('12345678qwer14411', 'book3', 'Yura3', 'Ranok', '12/10/10', 1, 'Good book', 30.5);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, genreid, description, price)
+VALUES ('12345678qwer123124', 'book4', 'Yura4', 'Ranok', '12/05/02', 1, 'Good book', 5);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, genreid, description, price)
+VALUES ('12345678qwer2353523', 'book5', 'Yura5', 'Ranok', '12/07/02', 1, 'Good book', 100);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, genreid, description, price)
+VALUES ('12345678qwer42342', 'book6', 'Yura6', 'Ranok', '12/10/11', 1, 'Good book', 45);
+INSERT INTO book_groups (id, name, author, edition, publicationdate, genreid, description, price)
+VALUES ('12345678qwer232', 'book7', 'Yura7', 'Ranok', '04/10/02', 1, 'Good book', 13);
+
+SELECT *
+FROM book_groups;
+
+
+
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+
+SELECT COUNT(id) as count FROM books where unavailable = FALSE;
+
+UPDATE book_groups SET image = 'default.jpg';
+
+SELECT *
+FROM genres;
+INSERT INTO genres (id, name) VALUES (DEFAULT, 'porn');
+
+DELETE FROM books;
+DELETE FROM book_groups;
+select * from users;
+
+insert INTO orders (bookid, userid, date_borrow, date_expected, date_actual, place) VALUES (8,1,'10/10/10','11/10/10',current_date,1);
+insert INTO orders (bookid, userid, date_borrow, date_expected, date_actual, place) VALUES (9,1,'10/10/10','11/10/10',current_date,1);
+insert INTO orders (bookid, userid, date_borrow, date_expected, date_actual, place) VALUES (10,1,'10/10/10','11/10/10',current_date,1);
+
+
+SELECT * from orders;
+
+SELECT count(o.id) from books as b INNER JOIN  orders o ON b.id = o.bookid where b.groupid = '12345678qwer414';
