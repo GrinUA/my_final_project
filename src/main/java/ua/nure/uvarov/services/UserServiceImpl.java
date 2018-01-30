@@ -4,10 +4,6 @@ package ua.nure.uvarov.services;
 import ua.nure.uvarov.dao.UserDao;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.transaction.DBManager;
-import ua.nure.uvarov.transaction.Transaction;
-
-import java.sql.SQLException;
-
 import java.util.List;
 
 
@@ -65,9 +61,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean block(String login) {
+    public boolean block(String email) {
         return dbManager.execute(() ->
-                userDao.changeBlockStatus(login, true));
+                userDao.changeBlockStatus(email, true));
     }
 
     @Override
@@ -90,6 +86,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
+        return dbManager.execute(()->userDao.getAll());
+    }
+
+    @Override
+    public List<User> getUsersByParamether() {
         return dbManager.execute(()->userDao.getAll());
     }
 }

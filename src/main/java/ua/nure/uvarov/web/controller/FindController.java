@@ -4,9 +4,8 @@ import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.entity.UserRole;
 import ua.nure.uvarov.exceptions.NotFoundException;
-import ua.nure.uvarov.handler.AdminCabinetHandler;
-import ua.nure.uvarov.handler.PersonalCabinetHandler;
-import ua.nure.uvarov.services.UserService;
+import ua.nure.uvarov.handler.AdminCabinetFindHandler;
+import ua.nure.uvarov.handler.FindHandler;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,9 +17,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/cabinet.do")
-public class CabinetController extends HttpServlet {
-    private Map<UserRole,PersonalCabinetHandler> handlerContainer;
+@WebServlet("/find.do")
+public class FindController extends HttpServlet {
+    private Map<UserRole, FindHandler> handlerContainer;
 
 
     @Override
@@ -28,27 +27,16 @@ public class CabinetController extends HttpServlet {
         if (req.getSession().getAttribute(Parameters.S_USER) == null) {
             throw new NotFoundException();
         } else {
-            User user = (User)req.getSession().getAttribute(Parameters.S_USER);
-            handlerContainer.get(user.getRole()).execute(req,resp);
-            req.getRequestDispatcher("WEB-INF/jsp/cabinet.jsp").forward(req, resp);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute(Parameters.S_USER) == null) {
-            throw new NotFoundException();
-        } else {
-
-            req.getRequestDispatcher("WEB-INF/jsp/cabinet.jsp").forward(req, resp);
+            User user = (User) req.getSession().getAttribute(Parameters.S_USER);
+            handlerContainer.get(user.getRole()).execute(req, resp);
 
         }
     }
-
         @Override
         public void init (ServletConfig config) throws ServletException {
             handlerContainer = new HashMap<>();
-            handlerContainer.put(UserRole.ADMIN,new AdminCabinetHandler());
+            handlerContainer.put(UserRole.ADMIN, new AdminCabinetFindHandler());
         }
+
     }
 

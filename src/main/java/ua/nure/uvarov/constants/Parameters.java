@@ -19,6 +19,9 @@ public class Parameters {
     public static final String ROLE_CLIENT ="client";
     public static final String ROLE_ADMIN = "admin";
     public static final String ALL_USERS = "userList";
+    public static final String USER_STATUS = "userStatus";
+    public static final String USER_UNBLOCK = "unblock";
+    public static final String USER_BLOCK = "block";
 
     public static final String NAME = "name";
     public static final String AUTHOR = "author";

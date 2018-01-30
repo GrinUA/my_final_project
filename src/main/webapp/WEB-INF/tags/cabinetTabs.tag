@@ -5,6 +5,13 @@
         <c:if test="${requestScope.activeTab == 'usersTab'}">
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=booksTab">Books</a></li>
+            <li>
+               <form action="find.do" method="get">
+                   <input required name="searchText"/>
+                   <input type="hidden" name="activeTab" value="usersTab"/>
+                   <input type="submit" value="submit">Find!</input>
+               </form>
+            </li>
             <c:choose>
                 <c:when test="${not empty userList}">
                     <%--<t:pages />--%>
@@ -19,7 +26,7 @@
                             <c:if test="${user.email != sessionScope.s_user.email}">
                                 <c:choose>
                                     <c:when test="${user.blocked}">
-                                        <tr class="danger">
+                                        <tr class="active">
                                     </c:when>
                                     <c:otherwise>
                                         <tr class="success">
@@ -30,6 +37,23 @@
                                 <td>${user.firstName}</td>
                                 <td>${user.role}</td>
                                 <td>${user.blocked}</td>
+
+                                <td> <form action="userstatus.do" method="post">
+                                <input type="hidden" name="email" value="${user.email}"/>
+                                <c:choose>
+                                    <c:when test="${user.blocked}">
+                                        <input type="hidden" name="userStatus" value="unblock"/>
+                                        <button type="submit" class="btn btn-success">Unblock</button>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="hidden" name="userStatus" value="block"/>
+                                        <button type="submit" class="btn btn-danger"> Block</button>
+                                        </td>
+                                    </c:otherwise>
+                                </c:choose>
+                                </form>
+                                <td>
                                 </tr>
                             </c:if>
                         </c:forEach>
@@ -60,8 +84,8 @@
                                 <td>${book.name}</td>
                                 <td>${book.author}</td>
                                 <td>${book.edition}</td>
-                                <td>${book.publicationDate}</td>
-                                <td>${book.genre}</td>
+                                <td><fmt:formatDate pattern="MMM yyyy" value="${book.publicationDate}"/></td>
+                                <td>${book.genre.name}</td>
                                 <td>${book.price}</td>
                             </tr>
                         </c:forEach>

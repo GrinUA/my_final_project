@@ -91,10 +91,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean isBlocked(String login) {
+    public boolean isBlocked(String email) {
         Connection connection = ThreadLockHandler.getConnection();
         try (PreparedStatement st = connection.prepareStatement(MySQL.USERS_BLOCK_STATUS)) {
-            st.setString(1, login);
+            st.setString(1, email);
             ResultSet resultSet = st.executeQuery();
             resultSet.next();
             return resultSet.getInt(Parameters.BLOCKED) == 1;
@@ -104,8 +104,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeBlockStatus(String login, boolean blocked) {
-        return false;
+    public boolean changeBlockStatus(String email, boolean blocked) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try(PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_BLOCK_STATUS_BY_EMAIL)) {
+            st.setInt(1, blocked?1:0);
+            st.setString(2, email);
+          st.execute();
+            return true;
+        }catch (SQLException e){
+            throw new DataBaseException(e);
+        }
     }
 
     @Override
@@ -119,6 +127,25 @@ public class UserDaoImpl implements UserDao {
             while (!resultSet.isLast()) {
                 resultSet.next();
               User user = new UserRowMapper().mapRow(resultSet);
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return list;
+    }
+
+    @Override
+    public List<User> getUsersByParamether() {
+        List<User> list;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_USERS)) {
+            list = new ArrayList<>();
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            while (!resultSet.isLast()) {
+                resultSet.next();
+                User user = new UserRowMapper().mapRow(resultSet);
                 list.add(user);
             }
         } catch (SQLException e) {

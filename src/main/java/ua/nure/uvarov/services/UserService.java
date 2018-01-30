@@ -7,24 +7,26 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean isExist(String login);
+    boolean isExist(String email);
 
     long create(User user);
 
     boolean isAuthorize(User user);
 
-    User read(String login);
+    User read(String email);
 
     User read(int id);
 
-    boolean isBlocked(String login);
+    boolean isBlocked(String email);
 
-    boolean unblock(String login);
+    boolean unblock(String email);
 
-    boolean block(String login);
+    boolean block(String email);
 
     User tryToLogIn(User userBean);
 
     List<User> getAllUsers();
+
+    List<User> getUsersByParamether();
 
 }

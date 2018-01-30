@@ -15,4 +15,5 @@ public interface UserDao extends GenericDao<User> {
 
     boolean changeBlockStatus(String email,boolean blocked);
     List<User>  getAll();
+    List<User> getUsersByParamether();
 }
