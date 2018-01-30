@@ -34,7 +34,7 @@ public class BookDaoImpl implements BookDao {
             Book book = new Book();
             book.setId(resultSet.getInt(Parameters.ID));
             book.setGroupId(resultSet.getInt(Parameters.GROUP_ID));
-            book.setUnavailable(resultSet.getBoolean(Parameters.UNAVAILABLE)/*==1*/);
+            book.setAvailable(resultSet.getBoolean(Parameters.AVAILABLE)/*==1*/);
 
             list.add(book);
         } catch (SQLException e) {

@@ -4,6 +4,8 @@ import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.entity.UserRole;
 import ua.nure.uvarov.exceptions.NotFoundException;
+import ua.nure.uvarov.handler.AdminCabinetHandler;
+import ua.nure.uvarov.handler.PersonalCabinetHandler;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,13 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/cabinet.do")
 public class CabinetController extends HttpServlet {
-    private Map<UserRole,PersonalCainetHandler> handlerContainer;
+    private Map<UserRole,PersonalCabinetHandler> handlerContainer;
 
 
     @Override
@@ -26,10 +27,8 @@ public class CabinetController extends HttpServlet {
         if (req.getSession().getAttribute(Parameters.S_USER) == null) {
             throw new NotFoundException();
         } else {
-           User user = (User)req.getSession().getAttribute(Parameters.S_USER);
+            User user = (User)req.getSession().getAttribute(Parameters.S_USER);
             handlerContainer.get(user.getRole()).execute(req,resp);
-
-
             req.getRequestDispatcher("WEB-INF/jsp/cabinet.jsp").forward(req, resp);
         }
     }

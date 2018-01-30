@@ -17,7 +17,7 @@
                                 class="login"><a>${sessionScope.s_user.email}<i class="fa fa-user"></i></a>
                         </li>
                         <li
-                                class="login"><a href="cabinet.do">Cabinet<i class="fa fa-user"></i></a>
+                                class="login"><a href="cabinet.do?activeTab=default">Cabinet<i class="fa fa-user"></i></a>
                         </li>
                         <li>
                             <a href="logout.do"><i class="fa fa-lock"></i> LogOut</a>

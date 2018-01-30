@@ -26,7 +26,8 @@ public class Parameters {
     public static final String PUBLICATION_DATE = "publicationDate";
     public static final String GROUP = "group";
     public static final String GENRE = "genreId";
-    public static final String UNAVAILABLE = "unavailable";
+    public static final String AVAILABLE = "available";
+    public static final String ALL_BOOKS = "bookList";
 
     public static final String BOOK_ID = "bookid";
     public static final String USER_ID = "userid";
@@ -67,5 +68,8 @@ public class Parameters {
     public static final String UNAVAILABLE_BOOK_COUNT = "unavailableBookCount";
     public static final String ORDERED_BOOK_COUNT = "orderedBookCount";
 
-
+    public static final String ACTIVE_TAB = "activeTab";
+    public static final String TAB_USERS = "usersTab";
+    public static final String TAB_BOOKS = "booksTab";
+    public static final String TAB_DEFAULT = "default";
 }

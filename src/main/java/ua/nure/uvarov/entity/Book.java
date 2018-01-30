@@ -6,7 +6,7 @@ import java.util.Date;
 public class Book {
     private int id;
     private int groupId;
-    private boolean unavailable;
+    private boolean available;
 
     public int getId() {
         return id;
@@ -24,11 +24,11 @@ public class Book {
         this.groupId = groupId;
     }
 
-    public boolean isUnavailable() {
-        return unavailable;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setUnavailable(boolean unavailable) {
-        this.unavailable = unavailable;
+    public void setAvailable(boolean unavailable) {
+        this.available = unavailable;
     }
 }
