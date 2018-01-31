@@ -28,7 +28,7 @@ public class Book {
         return available;
     }
 
-    public void setAvailable(boolean unavailable) {
-        this.available = unavailable;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

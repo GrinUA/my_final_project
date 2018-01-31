@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public long create(User user) {
+    public int create(User user) {
         return dbManager.execute(() -> {
             user.setPassword(user.getPassword());
             return userDao.create(user);

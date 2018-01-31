@@ -5,9 +5,8 @@ import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.entity.UserRole;
 import ua.nure.uvarov.exceptions.NotFoundException;
 import ua.nure.uvarov.handler.AdminCabinetHandler;
+import ua.nure.uvarov.handler.ClientCabinetHandler;
 import ua.nure.uvarov.handler.PersonalCabinetHandler;
-import ua.nure.uvarov.services.UserService;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +48,7 @@ public class CabinetController extends HttpServlet {
         public void init (ServletConfig config) throws ServletException {
             handlerContainer = new HashMap<>();
             handlerContainer.put(UserRole.ADMIN,new AdminCabinetHandler());
+            handlerContainer.put(UserRole.CLIENT, new ClientCabinetHandler());
         }
     }
 

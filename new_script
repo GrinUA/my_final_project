@@ -13,7 +13,7 @@ CREATE TABLE books
 (
     id INTEGER DEFAULT nextval('books_id_seq'::regclass) PRIMARY KEY NOT NULL,
     groupid INTEGER NOT NULL,
-    unavailable BOOLEAN DEFAULT true,
+   available BOOLEAN DEFAULT true,
     CONSTRAINT fk_books_book_groups1 FOREIGN KEY (groupid) REFERENCES book_groups (id)
 );
 CREATE TABLE genres
@@ -102,17 +102,17 @@ FROM book_groups;
 
 
 
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', false) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
-INSERT INTO books (groupid,unavailable) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', false) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', TRUE ) ;
+INSERT INTO books (groupid,available) VALUES ('12345678qwer414', TRUE ) ;
 
-SELECT COUNT(id) as count FROM books where unavailable = FALSE;
+SELECT COUNT(id) as count FROM books where available = TRUE;
 
 UPDATE book_groups SET image = 'default.jpg';
 

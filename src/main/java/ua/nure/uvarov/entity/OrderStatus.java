@@ -1,5 +1,5 @@
 package ua.nure.uvarov.entity;
 
 public enum OrderStatus {
-    CLOSED ,OPEN,
+        CLOSED ,OPEN, WAITING
 }

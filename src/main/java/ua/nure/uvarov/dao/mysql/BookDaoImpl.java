@@ -44,13 +44,13 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean isUnavailable(int id) {
+    public boolean isAvailable(int id) {
            /* Connection connection = ThreadLockHandler.getConnection();
             try (PreparedStatement st = connection.prepareStatement(MySQL.BOOK_AVAILABLE_STATUS)) {
                 st.setInt(1, id);
                 ResultSet resultSet = st.executeQuery();
                 resultSet.next();
-                return (resultSet.getInt(Parameters.UNAVAILABLE))==1;
+                return (resultSet.getInt(Parameters.AVAILABLE))==1;
             } catch (SQLException e) {
                 throw new DataBaseException(e);
             }*/

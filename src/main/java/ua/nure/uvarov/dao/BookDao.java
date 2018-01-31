@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookDao extends GenericDao<Book> {
     List<Book> getBooksByGroup(int id);
-    boolean isUnavailable(int id);
+    boolean isAvailable(int id);
     void addBookToGroup(Book book);
 
 }

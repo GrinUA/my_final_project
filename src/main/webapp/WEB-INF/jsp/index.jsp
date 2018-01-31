@@ -34,7 +34,8 @@
                             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
-                            <c:forEach var="i" begin="0" end="2">
+                            <c:set var="indexI" value="${bookGroups.size()>3?3:bookGroups.size()}"/>
+                            <c:forEach var="i" begin="0" end="${indexI-1}">
                                 <c:set var="topBook" scope="page" value="${bookGroups.get(i)}"/>
 
                                 <div class="item <c:if test="${i==0}">active</c:if>">
@@ -80,13 +81,15 @@
 
                             <div class="col-sm-4 col-lg-4 col-md-4">
                                 <div class="thumbnail">
-                                    <img src="../../imgs/default.jpg" alt="">
+                                    <img class="slide-image slide-image-my"
+                                         src="/images/${bookG.image}?owner=user"
+                                         alt="">
                                     <div class="caption">
                                         <h4><a href="/bookInfo.do?articul=${bookG.id}">${bookG.name}</a>
                                         </h4>
                                         <p>Author: ${bookG.author}</p>
                                         <p>Edition: ${bookG.edition} / <fmt:formatDate pattern="MMM yyyy"
-                                                                                      value="${bookG.publicationDate}"/></p>
+                                                                                       value="${bookG.publicationDate}"/></p>
                                         <p>Genre: ${bookG.genre.name}</p>
                                         <p>${bookG.description}</p>
                                     </div>

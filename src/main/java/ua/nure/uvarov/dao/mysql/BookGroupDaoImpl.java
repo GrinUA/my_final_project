@@ -159,11 +159,12 @@ public class BookGroupDaoImpl implements BookGroupDao {
     }
 
     @Override
-    public int getBookCountByState(boolean unavailable) {
+    public int getBookCountByState(boolean available, String groupId) {
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.COUNT_BOOKS_BY_STATE_UNAVAILABLE)) {
-            st.setBoolean(1, unavailable);
-            // for MySql: st.setInt(1, unavailable? 1 : 0);
+        try (PreparedStatement st = connection.prepareStatement(MySQL.COUNT_BOOKS_BY_STATE_AVAILABLE)) {
+            st.setBoolean(1, available);
+            st.setString(2,groupId);
+            // for MySql: st.setInt(1, available? 1 : 0);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             resultSet.next();

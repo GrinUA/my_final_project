@@ -13,7 +13,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     <context-param>
         <description>Image path</description>
         <param-name>images_path</param-name>
-        <param-value>/server/file_storage/images</param-value>
+        <param-value>D:/server/file_storage/images</param-value>
     </context-param>
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>

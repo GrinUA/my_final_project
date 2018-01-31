@@ -2,6 +2,7 @@ package ua.nure.uvarov.dao.mapper;
 
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.Order;
+import ua.nure.uvarov.entity.OrderStatus;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class OrderRowMapper implements EntityRowMapper<Order> {
         order.setExpectedDate(new java.util.Date(resultSet.getDate(Parameters.EXPECTED_DATE).getTime()));
         order.setActualDate(new java.util.Date(resultSet.getDate(Parameters.ACTUAL_DATE).getTime()));
         order.setPlace((resultSet.getInt(Parameters.PLACE)) == 0);
-        order.setStatus(resultSet.getString(Parameters.STATUS));
+        order.setStatus(OrderStatus.valueOf(resultSet.getString(Parameters.STATUS)));
         return order;
 
     }

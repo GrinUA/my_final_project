@@ -9,7 +9,7 @@ public interface UserService {
 
     boolean isExist(String email);
 
-    long create(User user);
+    int create(User user);
 
     boolean isAuthorize(User user);
 

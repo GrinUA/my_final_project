@@ -10,7 +10,7 @@ public class Order {
     private Date expectedDate;
     private Date actualDate;
     private boolean place;
-    private String status;
+    private OrderStatus status;
 
     public int getId() {
         return id;
@@ -68,11 +68,11 @@ public class Order {
         this.place = place;
     }
 
-    public String isStatus() {
+    public OrderStatus isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 }

@@ -68,7 +68,6 @@ public class Parameters {
 
     public static final String ALL_BOOK_COUNT = "allBookCount";
     public static final String AVAILABLE_BOOK_COUNT = "availableBookCount";
-    public static final String UNAVAILABLE_BOOK_COUNT = "unavailableBookCount";
     public static final String ORDERED_BOOK_COUNT = "orderedBookCount";
 
     public static final String ACTIVE_TAB = "activeTab";
