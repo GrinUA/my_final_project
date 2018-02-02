@@ -23,6 +23,7 @@ public class RegisterController extends HttpServlet {
     public void init() throws ServletException {
         registrationService = new RegisterService();
         userService = (UserService) getServletContext().getAttribute(Parameters.USER_SERVICE);
+
     }
 
     @Override

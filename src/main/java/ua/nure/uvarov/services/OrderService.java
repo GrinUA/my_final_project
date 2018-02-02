@@ -8,5 +8,5 @@ import java.util.Map;
 public interface OrderService {
     List<Order> getUserOrders(int id);
     Map<String,Integer> getDataAboutOrderedBooks(String groupId);
-    Order createOrder(User user, int idBook);
+    String createOrder(User user, String bookGroup);
 }

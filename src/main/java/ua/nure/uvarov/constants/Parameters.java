@@ -22,15 +22,19 @@ public class Parameters {
     public static final String USER_STATUS = "userStatus";
     public static final String USER_UNBLOCK = "unblock";
     public static final String USER_BLOCK = "block";
+    public static final String USER_ORDERS = "userOrders";
 
+    public static final String BOOK = "book";
     public static final String NAME = "name";
     public static final String AUTHOR = "author";
     public static final String EDITION = "edition";
     public static final String PUBLICATION_DATE = "publicationDate";
     public static final String GROUP = "group";
     public static final String GENRE = "genreId";
+    public static final String GENRE_NAME = "genreName";
     public static final String AVAILABLE = "available";
     public static final String ALL_BOOKS = "bookList";
+     public static final String BOOK_ARTICUL = "articul";
 
     public static final String BOOK_ID = "bookid";
     public static final String USER_ID = "userid";
@@ -39,6 +43,7 @@ public class Parameters {
     public static final String ACTUAL_DATE = "date_expected";
     public static final String PLACE = "place";
     public static final String STATUS = "status";
+    public static final String ARCTICUL = "articul";
 
     public static final String S_ERRORS = "s_errors";
     public static final String ERRORS = "errors";
@@ -64,11 +69,12 @@ public class Parameters {
 
 
     public static final String DEFAULT_IMAGE_VALUE = "default.jpg";
-
+    public static final int ONE_DAY = 86400000;
 
     public static final String ALL_BOOK_COUNT = "allBookCount";
     public static final String AVAILABLE_BOOK_COUNT = "availableBookCount";
     public static final String ORDERED_BOOK_COUNT = "orderedBookCount";
+    public static final String ORDER_ID = "orderId";
 
     public static final String ACTIVE_TAB = "activeTab";
     public static final String TAB_USERS = "usersTab";

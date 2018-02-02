@@ -15,7 +15,7 @@ public interface UserService {
 
     User read(String email);
 
-    User read(int id);
+
 
     boolean isBlocked(String email);
 

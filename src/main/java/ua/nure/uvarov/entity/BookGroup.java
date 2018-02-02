@@ -84,4 +84,19 @@ public class BookGroup {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "BookGroup{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", edition='" + edition + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", description='" + description + '\'' +
+                ", genre=" + genre +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

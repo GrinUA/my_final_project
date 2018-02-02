@@ -50,7 +50,7 @@ public class ContextListener implements ServletContextListener {
 
         UserService userService = new UserServiceImpl(userDao, dbManager);
         BookService bookService = new BookServiceImpl(bookDao, bookGroupDao, dbManager);
-        OrderService orderService = new OrderServiceImpl(orderDao,bookGroupDao, dbManager);
+        OrderService orderService = new OrderServiceImpl(orderDao,bookGroupDao, bookDao, dbManager);
 
 
         servletContext.setAttribute(Parameters.USER_SERVICE, userService);

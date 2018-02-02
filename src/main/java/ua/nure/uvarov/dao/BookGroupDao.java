@@ -12,9 +12,11 @@ public interface BookGroupDao extends GenericDao<BookGroup> {
     BookGroup getBookGroupByName(String name);
     BookGroup getBookGroupByAuthor(String author);
     List<BookGroup> getBookGroupByGenre(int id);
+    boolean updateBook(BookGroup bookGroup);
 
     List<String> getGenres();
     Genre getGenreById(int id);
-
+    Genre getGenreByName(String name);
+    boolean isExist(String id);
     int getBookCountByState(boolean available, String groupId);
 }

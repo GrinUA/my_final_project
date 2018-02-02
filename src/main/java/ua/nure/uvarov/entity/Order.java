@@ -11,6 +11,19 @@ public class Order {
     private Date actualDate;
     private boolean place;
     private OrderStatus status;
+    private String guId;
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public String getGuId() {
+        return guId;
+    }
+
+    public void setGuId(String guId) {
+        this.guId = guId;
+    }
 
     public int getId() {
         return id;

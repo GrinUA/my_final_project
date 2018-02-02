@@ -9,5 +9,6 @@ public interface GenericDao<T> {
     void delete(T entity);
 
 
+
 }
 

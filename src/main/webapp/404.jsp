@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
-
+<link href="css/404.css" rel="stylesheet">
 
 <!DOCTYPE html>
 <html lang="en">

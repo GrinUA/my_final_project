@@ -8,8 +8,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     <welcome-file-list>
         <welcome-file>main.do</welcome-file>
     </welcome-file-list>
-
-
     <context-param>
         <description>Image path</description>
         <param-name>images_path</param-name>

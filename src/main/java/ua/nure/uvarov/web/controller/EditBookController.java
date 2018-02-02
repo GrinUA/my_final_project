@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/bookInfo.do")
-public class BookInfoController extends HttpServlet {
+@WebServlet("/editbook.do")
+public class EditBookController extends HttpServlet{
     private BookService bookService;
     private OrderService orderService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String bookId = req.getParameter(Parameters.ARCTICUL);
+        String bookId = req.getParameter("articul");
         if(bookId == null || bookId.isEmpty()){
             throw new NotFoundException();
         }
@@ -30,13 +30,17 @@ public class BookInfoController extends HttpServlet {
             throw new NotFoundException();
         }
         req.setAttribute("bookInfo", bookGroup);
-        req.setAttribute("booksData", orderService.getDataAboutOrderedBooks(bookGroup.getId()));
-        req.getRequestDispatcher("WEB-INF/jsp/bookInfo.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsp/bookEdit.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req,resp);
+        BookGroup bookGroup = bookService.getBook(req);
+        if(bookGroup != null) {
+            bookService.updateBookGroup(bookGroup);
+        }
+        resp.sendRedirect("bookinfo.do?articul=" + bookGroup.getId());
+
     }
 
     @Override
@@ -44,6 +48,4 @@ public class BookInfoController extends HttpServlet {
         bookService = (BookService) getServletContext().getAttribute(Parameters.BOOK_SERVICE);
         orderService = (OrderService) getServletContext().getAttribute(Parameters.ORDER_SERVICE);
     }
-
 }
-

@@ -26,16 +26,41 @@
                         <p>Edition: ${bookInfo.edition} / <fmt:formatDate pattern="MMM yyyy"
                                                                          value="${bookInfo.publicationDate}"/></p>
                         <p>Genre: ${bookInfo.genre.name}</p>
-                        <p>Available: <b style="color: limegreen">${booksData.get("availableBookCount") - booksData.get("orderedBookCount")}</b>/<b>${booksData.get("availableBookCount")}</b></p>
                         <h3>DESCRIPTION</h3>
                         <p><i>${bookInfo.description}</i></p>
                         </p>
                         <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">
-                                Order ->
-                            </button>
-                        </div>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.s_user}">
+                                <c:choose>
+                                    <c:when test="${booksData.get(availableBookCount) > 0}">
+                                        <form action="order.do" method="post" >
+                                            <input hidden name="articul" value="${bookInfo.id}">
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Order this book!
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary">
+                                                   This book not available now
+                                                </button>
+                                            </div>
+                                    </c:otherwise>
+                                </c:choose>
+
+                            </c:when>
+                            <c:otherwise>
+                                    <div class="btn-group">
+                                        <a href="login.do" class="btn btn-primary">
+                                            Please login
+                                        </a>
+                                    </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

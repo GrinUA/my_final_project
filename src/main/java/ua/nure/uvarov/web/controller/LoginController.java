@@ -47,24 +47,23 @@ public class LoginController extends HttpServlet {
         if (errors.isEmpty()) {
             User userResult = userService.tryToLogIn(user);
             if (userResult != null) {
-
-                req.getSession().setAttribute(Parameters.S_USER, userResult);
-                // req.setAttribute("s_user", userResult);
-                resp.sendRedirect("main.do");
-                //   req.getRequestDispatcher("/main.do").forward(req,resp);
-            } else {
-                if (user.isBlocked()) {
-                    errors.put(Parameters.BLOCKED, "U was blocked");
+                if (!userResult.isBlocked()) {
+                    req.getSession().setAttribute(Parameters.S_USER, userResult);
+                    resp.sendRedirect("main.do");
+                    return;
+                } else {
+                    errors.put(Parameters.BLOCKED, Messages.BLOCKED_USER);
                 }
-                req.getSession().setAttribute(Parameters.S_ERRORS, errors);
-                resp.sendRedirect("login.do");
             }
-        } else {
-            req.getSession().setAttribute(Parameters.S_ERRORS, errors);
-            resp.sendRedirect("login.jsp");
-        }
-    }
+            else{errors.put(Parameters.S_ERRORS, Messages.INVALID_EMAIL);
 
+            }
+        }
+        req.getSession().setAttribute(Parameters.S_ERRORS, errors);
+        resp.sendRedirect("login.jsp");
+    }
 }
+
+
 
 

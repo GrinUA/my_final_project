@@ -43,10 +43,6 @@ public class UserServiceImpl implements UserService {
         return dbManager.execute(() -> userDao.getUserByEmail(email));
     }
 
-    @Override
-    public User read(int id) {
-        return dbManager.execute(() -> userDao.getById(id));
-    }
 
     @Override
     public boolean isBlocked(String email) {
@@ -72,11 +68,10 @@ public class UserServiceImpl implements UserService {
             if (userDao.isExist(userBean.getEmail())) {
                 User user = userDao.getUserByEmail(userBean.getEmail());
                 if (user != null) {
-                    if (!user.isBlocked()) {
                         userBean.setPassword(userBean.getPassword());
                         if (userDao.getUserByEmailAndPassword(userBean)) {
                             return user;
-                        }
+
                     }
                 }
             }

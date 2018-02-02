@@ -6,4 +6,6 @@ public class Messages {
     public static final String CANNOT_CREATE_USER = "User is exist!";
     public static final String PASSWORD_NOT_EQUALS = "Passwords not march!";
 
+    public static final String BLOCKED_USER = "U was blocked";
+
 }

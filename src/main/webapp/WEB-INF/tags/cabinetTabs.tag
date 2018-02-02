@@ -87,6 +87,9 @@
                                 <td><fmt:formatDate pattern="MMM yyyy" value="${book.publicationDate}"/></td>
                                 <td>${book.genre.name}</td>
                                 <td>${book.price}</td>
+                                <td>
+                                <a href="editbook.do?articul=${book.id}" class="btn btn-primary">Edit</a>
+                            </td>
                             </tr>
                         </c:forEach>
                     </table>

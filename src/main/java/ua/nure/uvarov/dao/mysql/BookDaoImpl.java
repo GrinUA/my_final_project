@@ -34,7 +34,7 @@ public class BookDaoImpl implements BookDao {
             Book book = new Book();
             book.setId(resultSet.getInt(Parameters.ID));
             book.setGroupId(resultSet.getInt(Parameters.GROUP_ID));
-            book.setAvailable(resultSet.getBoolean(Parameters.AVAILABLE)/*==1*/);
+            book.setAvailable(resultSet.getInt(Parameters.AVAILABLE)==1);
 
             list.add(book);
         } catch (SQLException e) {
@@ -44,17 +44,34 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean isAvailable(int id) {
-           /* Connection connection = ThreadLockHandler.getConnection();
-            try (PreparedStatement st = connection.prepareStatement(MySQL.BOOK_AVAILABLE_STATUS)) {
+    public boolean isAvailableById(int id) {
+           Connection connection = ThreadLockHandler.getConnection();
+            try (PreparedStatement st = connection.prepareStatement(MySQL.BOOK_AVAILABLE)) {
                 st.setInt(1, id);
                 ResultSet resultSet = st.executeQuery();
                 resultSet.next();
                 return (resultSet.getInt(Parameters.AVAILABLE))==1;
             } catch (SQLException e) {
                 throw new DataBaseException(e);
-            }*/
-        return true;
+            }
+    }
+
+
+
+    public Book availableBookFromGroupId(String id) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_FROM_GROUP)) {
+            st.setString(1, id);
+            ResultSet resultSet = st.executeQuery();
+            resultSet.next();
+            Book book = new Book();
+            book.setId(resultSet.getInt(Parameters.ID));
+            book.setGroupId(resultSet.getInt(Parameters.GROUP_ID));
+            book.setAvailable(resultSet.getInt(Parameters.AVAILABLE)==1);
+            return book;
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
     }
 
 
@@ -72,6 +89,21 @@ public class BookDaoImpl implements BookDao {
                 resultSet.next();
                 book.setId(resultSet.getInt(1));
                 return book.getId();
+            } catch (SQLException e) {
+                throw new DataBaseException(e);
+            }
+        }
+    }
+
+
+    public boolean updateStatus (boolean available, int id) {
+        {
+            Connection connection = ThreadLockHandler.getConnection();
+            try (PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_BOOK_STATUS)) {
+                st.setInt(1, available?1:0);
+                st.setInt(2, id);
+                st.executeUpdate();
+                return true;
             } catch (SQLException e) {
                 throw new DataBaseException(e);
             }
