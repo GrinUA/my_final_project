@@ -21,7 +21,8 @@ public final class MySQL {
     public static final String FIND_ALL_GENRES = "SELECT * FROM genres";
     public static final String UPDATE_BOOK_STATUS = "UPDATE books SET available = ? WHERE id = ?";
 
-    public static final String UPDATE_BOOK_GROUP = "UPDATE into books (name,author,edition,publicationdate,genreid,price,desription) values(?,?,?,?,?,?,?)  WHERE id = ?";
+
+    public static final String UPDATE_BOOK_GROUP = "UPDATE book_groups SET name=?,author=?,edition=?,publicationdate=?,genreid=?,price=?,description=? WHERE id = ?";
     public static final String CREATE_BOOK_GROUP =
             "INSERT into book_groups (id,name,author,edition,publicationDate,description, price,genreId, image) values (?,?,?,?,?,?,?,?,?)";
     public static final String FIND_BOOK_GROUP_BY_ID = "SELECT * FROM book_groups WHERE id = ?";

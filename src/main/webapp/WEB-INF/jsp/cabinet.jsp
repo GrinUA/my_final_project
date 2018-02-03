@@ -9,13 +9,14 @@
 <t:header/>
 <div class="container">
     <div class="row">
-        <h2> Welcome to cabinet ${sessionScope.s_user.firstName} ${sessionScope.s_user.lastName}!</h2>
-    </div>
-    <div class="col-md-9">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"> <h2> Welcome to cabinet ${sessionScope.s_user.firstName} ${sessionScope.s_user.lastName}!</h2>
         <div class="panel panel-info">
             <div class="panel-heading">Cabinet</div>
            <t:cabinetTabs/>
         </div>
+    </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 

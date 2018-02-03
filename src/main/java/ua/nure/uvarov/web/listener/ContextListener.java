@@ -23,6 +23,7 @@ import ua.nure.uvarov.dao.mysql.UserDaoImpl;
 import ua.nure.uvarov.exceptions.AppInitializationException;
 import ua.nure.uvarov.services.*;
 import ua.nure.uvarov.transaction.DBManager;
+import ua.nure.uvarov.util.DomParser;
 
 
 @WebListener
@@ -56,6 +57,12 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute(Parameters.USER_SERVICE, userService);
         servletContext.setAttribute(Parameters.BOOK_SERVICE, bookService);
         servletContext.setAttribute(Parameters.ORDER_SERVICE, orderService);
+
+        String path = servletContext.getInitParameter("accessFile_path");
+        DomParser domParser = new DomParser();
+        domParser.parse(path);
+        servletContext.setAttribute("accessMap",domParser.getAccessMap());
+        servletContext.setAttribute("urlPatterns",domParser.getAllRestricUrl());
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/editbook.do")
+@WebServlet("/editBook.do")
 public class EditBookController extends HttpServlet{
     private BookService bookService;
     private OrderService orderService;
@@ -35,11 +35,16 @@ public class EditBookController extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         BookGroup bookGroup = bookService.getBook(req);
         if(bookGroup != null) {
             bookService.updateBookGroup(bookGroup);
+            resp.sendRedirect("bookInfo.do?articul=" + bookGroup.getId());
         }
-        resp.sendRedirect("bookinfo.do?articul=" + bookGroup.getId());
+        else {
+            req.setAttribute("genre", "genre not found");
+        }
+
 
     }
 

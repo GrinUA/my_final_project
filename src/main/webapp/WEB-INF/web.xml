@@ -25,4 +25,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     <exception-type>ua.nure.uvarov.exceptions.NotFoundException</exception-type>
     <location>/404.jsp</location>
   </error-page>
+
+    <filter>
+        <filter-name>PermissionFilter</filter-name> <!-- mandatory -->
+        <filter-class>ua.nure.uvarov.web.filter.PremissionFilter</filter-class> <!-- mandatory -->
+    </filter>
+    <filter-mapping>
+        <filter-name>PermissionFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <context-param>
+    <param-name>accessFile_path</param-name>
+    <param-value>access.xml</param-value>
+</context-param>
 </web-app>

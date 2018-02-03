@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<security>
+    <constraint>
+     </constraint>
+     <constraint>
+         <role>unknown</role>
+         <url>/login.do</url>
+         <url>/register.do</url>
+     </constraint>
+     <constraint>
+         <role>client</role>
+         <role>operator</role>
+         <role>admin</role>
+         <url>/order.do</url>
+         <url>/cabinet.do</url>
+         <url>/logout.do</url>
+     </constraint>
+     <constraint>
+         <role>client</role>
+         <role>admin</role>
+         <role>unknown</role>
+         <role>operator</role>
+         <url>/bookInfo.do</url>
+     </constraint>
+    <constraint>
+        <role>admin</role>
+        <url>/editBook.do</url>
+    </constraint>
+
+</security>

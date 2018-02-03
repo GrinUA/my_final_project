@@ -17,6 +17,7 @@ public interface BookGroupDao extends GenericDao<BookGroup> {
     List<String> getGenres();
     Genre getGenreById(int id);
     Genre getGenreByName(String name);
+
     boolean isExist(String id);
     int getBookCountByState(boolean available, String groupId);
 }

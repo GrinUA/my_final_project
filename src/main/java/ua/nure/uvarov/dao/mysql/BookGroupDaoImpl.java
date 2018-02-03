@@ -45,16 +45,21 @@ public class BookGroupDaoImpl implements BookGroupDao {
             st.setString(1, name);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
-            resultSet.next();
+            if(resultSet.next()){
+
             Genre genre = new Genre();
             genre.setId(resultSet.getInt(Parameters.ID));
             genre.setName(resultSet.getString(Parameters.NAME));
 
-            return genre;
+            return genre;}
+            else return null;
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
     }
+
+
+
 
     @Override
     public boolean isExist(String  id) {

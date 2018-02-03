@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/userstatus.do")
+@WebServlet("/userStatus.do")
 public class UserStatusChangeController extends HttpServlet {
     private UserService userService;
 

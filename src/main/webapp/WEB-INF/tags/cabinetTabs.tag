@@ -1,27 +1,30 @@
 <%@ tag body-content="empty" language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+
 <ul class="nav nav-tabs">
     <c:if test="${sessionScope.s_user.role == 'ADMIN'}">
         <c:if test="${requestScope.activeTab == 'usersTab'}">
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=booksTab">Books</a></li>
-            <li>
-               <form action="find.do" method="get">
-                   <input required name="searchText"/>
-                   <input type="hidden" name="activeTab" value="usersTab"/>
-                   <input type="submit" value="submit">Find!</input>
-               </form>
+            <li role="presentation"><a href="cabinet.do?activeTab=genre">Add new genre</a>
             </li>
+
+
             <c:choose>
                 <c:when test="${not empty userList}">
                     <%--<t:pages />--%>
                     <table class="table">
+                        <form action="find.do" method="get">
+                            <input required name="searchText"/>
+                            <input type="hidden" name="activeTab" value="usersTab"/>
+                            <input type="submit" value="Find!">
+                        </form>
                         <th>Email</th>
                         <th>Surname</th>
                         <th>Name</th>
                         <th>Role</th>
                         <th>Block</th>
-
                         <c:forEach items="${userList}" var="user">
                             <c:if test="${user.email != sessionScope.s_user.email}">
                                 <c:choose>
@@ -38,7 +41,7 @@
                                 <td>${user.role}</td>
                                 <td>${user.blocked}</td>
 
-                                <td> <form action="userstatus.do" method="post">
+                                <td> <form action="userStatus.do" method="post">
                                 <input type="hidden" name="email" value="${user.email}"/>
                                 <c:choose>
                                     <c:when test="${user.blocked}">
@@ -48,7 +51,8 @@
                                     </c:when>
                                     <c:otherwise>
                                         <input type="hidden" name="userStatus" value="block"/>
-                                        <button type="submit" class="btn btn-danger"> Block</button>
+                                        <button type="submit" class="btn btn-danger">&ensp;Block&ensp;
+                                        </button>
                                         </td>
                                     </c:otherwise>
                                 </c:choose>
@@ -68,6 +72,7 @@
         <c:if test="${requestScope.activeTab == 'booksTab'}">
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
+            <li role="presentation"><a href="cabinet.do?activeTab=genre">Add new genre</a></li>
             <c:choose>
                 <c:when test="${not empty bookList}">
                     <%--<t:pages />--%>
@@ -84,12 +89,14 @@
                                 <td>${book.name}</td>
                                 <td>${book.author}</td>
                                 <td>${book.edition}</td>
-                                <td><fmt:formatDate pattern="MMM yyyy" value="${book.publicationDate}"/></td>
+                                <td><fmt:formatDate pattern="MMM yyyy"
+                                                    value="${book.publicationDate}"/></td>
                                 <td>${book.genre.name}</td>
                                 <td>${book.price}</td>
                                 <td>
-                                <a href="editbook.do?articul=${book.id}" class="btn btn-primary">Edit</a>
-                            </td>
+                                    <a href="editBook.do?articul=${book.id}"
+                                       class="btn btn-primary">Edit</a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -100,6 +107,21 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
+      <c:if test="${requestScope.activeTab == 'genre'}">
+            <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
+            <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
+            <li role="presentation" class="active"><a href="cabinet.do?activeTab=genre">Add new genre</a>
+            </li>
+            <form action="" AAAAAAGAVNODETECTED></form>
+        </c:if>
     </c:if>
+    <c:if test="${sessionScope.s_user.role == 'CLIENT'}">
+
+    </c:if>
+
+<c:if test="${sessionScope.s_user.role == 'ADMIN'}">
+</c:if>
 </ul>
+
+
 
