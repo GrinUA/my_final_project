@@ -88,6 +88,9 @@ public class Parameters {
 
     public static final String TAB_OPEN = "openTab";
 
+    public static final String BOOK_GROUP_TOP_LIST = "bookTopGroups";
+    public static final String GENRE_LIST = "genres";
+
 
 
 }

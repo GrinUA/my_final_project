@@ -39,7 +39,7 @@ public final class MySQL {
             "        bg.publicationdate,\n" +
             "        bg.image,\n" +
             "        bg.edition\n" +
-            "      FROM book_groups AS bg RIGHT JOIN books as b ON bg.id = b.groupId) as mergeTable;";
+            "      FROM book_groups AS bg RIGHT JOIN books as b ON bg.id = b.groupId) as mergeTable";
     public static final String COUNT_BOOKS_BY_STATE_AVAILABLE = "SELECT COUNT(id) as count FROM books where available = ? and groupId = ?";
     public static final String FIND_BOOK_FROM_GROUP = "SELECT * FROM books where available = 1 and groupId = ?";
 
