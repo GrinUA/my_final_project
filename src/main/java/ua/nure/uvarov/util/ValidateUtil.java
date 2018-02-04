@@ -1,12 +1,16 @@
 package ua.nure.uvarov.util;
 
 
+import ua.nure.uvarov.bean.FilterParams;
 import ua.nure.uvarov.bean.UsersBean;
 import ua.nure.uvarov.constants.Messages;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.constants.Regexes;
 import ua.nure.uvarov.entity.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -52,7 +56,40 @@ public class ValidateUtil {
         return errors;
     }
 
+    public Map<String, String> validateFilterParams(FilterParams filterParams) {
+        Map<String, String> errors = new HashMap<>();
+        if (filterParams.getName() != null
+                && !filterParams.getName().isEmpty()
+                && !validateByRegex(filterParams.getName(), Regexes.BOOK_STRING_PATTERN)) {
+            errors.put(Parameters.NAME, Messages.INVALID);
+        }
+        if (filterParams.getAuthor() != null
+                && !filterParams.getAuthor().isEmpty()
+                && !validateByRegex(filterParams.getAuthor(), Regexes.BOOK_STRING_PATTERN)) {
+            errors.put(Parameters.AUTHOR, Messages.INVALID);
+        }
+        if (filterParams.getEdition() != null
+                && !filterParams.getEdition().isEmpty()
+                && !validateByRegex(filterParams.getEdition(), Regexes.BOOK_STRING_PATTERN)) {
+            errors.put(Parameters.EDITION, Messages.INVALID);
+        }
+        if (filterParams.getGenreId() != null
+                && !filterParams.getGenreId().isEmpty()
+                && !validateByRegex(filterParams.getGenreId(), Regexes.BOOK_GENRE_PATTERN)) {
+            errors.put(Parameters.GENRE, Messages.INVALID);
+        }
+        if (filterParams.getPublicationDate()!=null && !filterParams.getPublicationDate().isEmpty()) {
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            try {
+                format.parse(filterParams.getPublicationDate());
+            } catch (ParseException e) {
+                errors.put(Parameters.PUBLICATION_DATE, Messages.INVALID);
+            }
+        }
 
+        return errors;
+    }
 
 
 }

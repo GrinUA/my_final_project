@@ -23,27 +23,52 @@
                             <div class="col-md-12">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators bottom-5">
-                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="0"
+                                            class="active"></li>
                                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                                     </ol>
                                     <div class="carousel-inner">
-                                        <c:set var="indexI" value="${bookGroups.size()>3?3:bookGroups.size()}"/>
-                                        <c:forEach var="i" begin="0" end="${indexI-1}">
-                                            <c:set var="topBook" scope="page" value="${bookGroups.get(i)}"/>
+                                        <c:set var="topBook" scope="page" value="${sessionScope.bookTopGroups.get(0)}"/>
+                                        <div class="item active">
+                                            <a href="/bookInfo.do?articul=${topBook.id}">
+                                                <div class="row margin-5t-5b-div">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4"><img class="slide-image slide-image-my"
+                                                                               src="/images/${topBook.image}?owner=user"
+                                                                               alt="">
+                                                    </div>
+                                                    <div class="col-md-5 color-white">
+                                                        <h3>${topBook.name}</h3>
+                                                        <p>Author: ${topBook.author}</p>
+                                                        <p>Edition: ${topBook.edition} / <fmt:formatDate
+                                                                pattern="MMM yyyy"
+                                                                value="${topBook.publicationDate}"/></p>
+                                                        <p>Genre: ${topBook.genre.name}</p>
+                                                        <p>${topBook.description}</p>
 
-                                            <div class="item <c:if test="${i==0}">active</c:if>">
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <c:forEach var="i" begin="2" end="${sessionScope.bookTopGroups.size()}">
+                                            <c:out value="${sessionScope.bookTopGroups.size()}"/>
+                                            <c:set var="topBook" scope="page" value="${sessionScope.bookTopGroups.get(i-1)}"/>
+                                            <div class="item">
                                                 <a href="/bookInfo.do?articul=${topBook.id}">
                                                     <div class="row margin-5t-5b-div">
                                                         <div class="col-md-2"></div>
                                                         <div class="col-md-4"><img class="slide-image slide-image-my"
                                                                                    src="/images/${topBook.image}?owner=user"
-                                                                                   alt=""></div>
+                                                                                   alt="">
+                                                        </div>
                                                         <div class="col-md-5 color-white">
                                                             <h3>${topBook.name}</h3>
                                                             <p>Author: ${topBook.author}</p>
-                                                            <p>Edition: ${topBook.edition} / <fmt:formatDate pattern="MMM yyyy"
-                                                                                                             value="${topBook.publicationDate}"/></p>
+                                                            <p>Edition: ${topBook.edition} / <fmt:formatDate
+                                                                    pattern="MMM yyyy"
+                                                                    value="${topBook.publicationDate}"/></p>
                                                             <p>Genre: ${topBook.genre.name}</p>
                                                             <p>${topBook.description}</p>
 
@@ -52,13 +77,13 @@
                                                     </div>
                                                 </a>
                                             </div>
-
                                         </c:forEach>
                                     </div>
                                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
                                     </a>
-                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <a class="right carousel-control" href="#carousel-example-generic"
+                                       data-slide="next">
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                     </a>
                                 </div>
@@ -78,18 +103,19 @@
 
         <div class="col-md-3">
             <p class="lead">Search</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
-            </div>
+            <t:searchBook/>
         </div>
 
         <div class="col-md-9">
             <div class="row">
                 <c:choose>
                     <c:when test="${not empty bookGroups}">
-                        <%--<t:pages />--%>
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li><a href="#">Previous</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </nav>
                         <br>
                         <c:forEach items="${bookGroups}" var="bookG">
 
