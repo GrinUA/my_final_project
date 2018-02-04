@@ -12,5 +12,6 @@ public interface OrderService {
     List<OrderBean> getAllOrders();
     Map<String,Integer> getCountOfAvailableBooks(String groupId);
     String createOrder(User user, String bookGroup);
-   /* boolean changeOrderStatus(int id, OrderStatus orderStatus);*/
+    Order getOrderByGuid(String guid);
+    boolean updateOrder(Order order);
 }

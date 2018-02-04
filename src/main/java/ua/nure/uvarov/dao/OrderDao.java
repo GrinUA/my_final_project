@@ -17,7 +17,5 @@ public interface OrderDao {
    List<Order> getUserOrders(int id);
    Order getOrderByGuid(String guId);
    boolean isUserOrders(int id);
-   boolean changeOrderStatusToClosed(Order order);
-    boolean changeOrderStatusToCancel(Order order);
-    boolean changeOrderStatusToOpen(Order order);
+   public boolean update(Order order);
 }

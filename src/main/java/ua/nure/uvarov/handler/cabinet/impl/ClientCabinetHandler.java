@@ -1,16 +1,16 @@
-package ua.nure.uvarov.handler;
+package ua.nure.uvarov.handler.cabinet.impl;
 
 import ua.nure.uvarov.bean.OrderBean;
 import ua.nure.uvarov.constants.Parameters;
-import ua.nure.uvarov.entity.Order;
 import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.handler.cabinet.PersonalCabinetHandler;
 import ua.nure.uvarov.services.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ClientCabinetHandler implements PersonalCabinetHandler{
+public class ClientCabinetHandler implements PersonalCabinetHandler {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {

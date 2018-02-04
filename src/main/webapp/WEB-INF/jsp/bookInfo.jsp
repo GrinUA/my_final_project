@@ -32,6 +32,7 @@
                         <!-- Split button -->
                         <c:choose>
                             <c:when test="${not empty sessionScope.s_user}">
+                                <c:if test="${sessionScope.s_user.role == 'CLIENT'}">
                                 <c:choose>
                                     <c:when test="${booksData.availableBookCount > 0}">
                                         <form action="order.do" method="post" >
@@ -50,8 +51,9 @@
                                                 </button>
                                             </div>
                                     </c:otherwise>
-                                </c:choose>
 
+                                </c:choose>
+                                </c:if>
                             </c:when>
                             <c:otherwise>
                                     <div class="btn-group">
@@ -60,6 +62,7 @@
                                         </a>
                                     </div>
                             </c:otherwise>
+
                         </c:choose>
                     </div>
                 </div>

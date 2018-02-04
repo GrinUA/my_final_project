@@ -1,4 +1,4 @@
-package ua.nure.uvarov.handler;
+package ua.nure.uvarov.handler.cabinet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -28,7 +28,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 
     <filter>
         <filter-name>PermissionFilter</filter-name> <!-- mandatory -->
-        <filter-class>ua.nure.uvarov.web.filter.PremissionFilter</filter-class> <!-- mandatory -->
+        <filter-class>ua.nure.uvarov.web.filter.PermissionFilter</filter-class> <!-- mandatory -->
     </filter>
     <filter-mapping>
         <filter-name>PermissionFilter</filter-name>

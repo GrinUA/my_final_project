@@ -1,8 +1,9 @@
-package ua.nure.uvarov.handler;
+package ua.nure.uvarov.handler.cabinet.impl;
 
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.BookGroup;
 import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.handler.cabinet.PersonalCabinetHandler;
 import ua.nure.uvarov.services.BookService;
 import ua.nure.uvarov.services.UserService;
 

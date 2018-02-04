@@ -66,9 +66,6 @@ public class Parameters {
     public static final String IMAGE = "image";
 
     public static final String BOOK_GROUP_LIST = "bookGroups";
-    public static final String BOOK_GROUP_TOP_LIST = "bookTopGroups";
-    public static final String GENRE_LIST = "genres";
-
     public static final String GROUP_ID = "groupId";
     public static final String COUNT = "count";
 
@@ -83,8 +80,14 @@ public class Parameters {
     public static final String ORDER_ID = "orderId";
     public static final String ORDER_STATUS = "orderStatus";
 
+    public static final String TAB_DEFAULT = "default";
     public static final String ACTIVE_TAB = "activeTab";
     public static final String TAB_USERS = "usersTab";
     public static final String TAB_BOOKS = "booksTab";
-    public static final String TAB_DEFAULT = "default";
+
+
+    public static final String TAB_OPEN = "openTab";
+
+
+
 }

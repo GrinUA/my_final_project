@@ -8,6 +8,4 @@ public class Messages {
 
     public static final String BLOCKED_USER = "U was blocked";
 
-    public static final String INVALID = "Invalid";
-
 }

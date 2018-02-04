@@ -57,7 +57,21 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getAllOrders() {
-        return null;
+        List<Order> list;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.ALL_ORDERS)) {
+            list = new ArrayList<>();
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            while (!resultSet.isLast()) {
+                resultSet.next();
+                Order order = new OrderRowMapper().mapRow(resultSet);
+                list.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return list;
     }
 
     @Override
@@ -82,23 +96,22 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order getOrderByGuid(String guId) {
-        return null;
-    }
-
-    public Order OrderDaoImpl(String guId) {
         Connection connection = ThreadLockHandler.getConnection();
         Order order = null;
         try (PreparedStatement st = connection.prepareStatement(MySQL.ORDER_BY_GUID)) {
+            st.setString(1, guId);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
-         if(resultSet.next()) {
-            order = new OrderRowMapper().mapRow(resultSet);
-         }
+            if(resultSet.next()) {
+                order = new OrderRowMapper().mapRow(resultSet);
+            }
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
         return order;
     }
+
+
 
 
     @Override
@@ -114,29 +127,16 @@ public class OrderDaoImpl implements OrderDao {
         return result;
     }
 
-    @Override
-    public boolean changeOrderStatusToClosed(Order order) {
-            Connection connection = ThreadLockHandler.getConnection();
-            try (PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_ORDER_STATUS_TO_CLOSED)) {
-                st.setDate(1, new java.sql.Date(System.currentTimeMillis()));
-
-                st.execute();
-                return true;
-            } catch (SQLException e) {
-                throw new DataBaseException(e);
-            }
+    public boolean update(Order order){
+        Connection connection = ThreadLockHandler.getConnection();
+        try(PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_ORDER)){
+            OrderRowMapper orderRowMapper = new OrderRowMapper();
+            orderRowMapper.unMap(st, order);
+            st.executeUpdate();
+            return true;
         }
-
-
-    @Override
-    public boolean changeOrderStatusToCancel(Order order) {
-        return false;
+        catch (SQLException e){
+            throw  new DataBaseException(e);
+        }
     }
-
-    @Override
-    public boolean changeOrderStatusToOpen(Order order) {
-        return false;
-    }
-
-
 }

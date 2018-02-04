@@ -1,7 +1,6 @@
 package ua.nure.uvarov.services;
 
 import sun.net.www.content.text.Generic;
-import ua.nure.uvarov.bean.FilterParams;
 import ua.nure.uvarov.bean.rowMapper.BeanRowMapper;
 import ua.nure.uvarov.bean.rowMapper.BookEditBeanRowMapper;
 import ua.nure.uvarov.constants.Parameters;
@@ -86,6 +85,11 @@ public class BookServiceImpl implements BookService {
         else return null;
     }
 
+    @Override
+    public boolean updateBookStatus(int id, boolean status) {
+        return dbManager.execute(() -> bookDao.updateStatus(status, id));
+    }
+
     public Genre getGenreByName(String name){
         return dbManager.execute(() -> bookGroupDao.getGenreByName(name));
     }
@@ -100,14 +104,5 @@ public class BookServiceImpl implements BookService {
         });
     }
 
-    @Override
-    public List<Genre> getGenres() {
-        return dbManager.execute(() -> bookGroupDao.getGenres());
-    }
-
-    @Override
-    public List<BookGroup> getBookGroup(FilterParams filterParams) {
-        return dbManager.execute(() -> bookGroupDao.findByCondition(filterParams));
-    }
 }
 

@@ -39,7 +39,7 @@ public final class MySQL {
             "        bg.publicationdate,\n" +
             "        bg.image,\n" +
             "        bg.edition\n" +
-            "      FROM book_groups AS bg RIGHT JOIN books as b ON bg.id = b.groupId) as mergeTable";
+            "      FROM book_groups AS bg RIGHT JOIN books as b ON bg.id = b.groupId) as mergeTable;";
     public static final String COUNT_BOOKS_BY_STATE_AVAILABLE = "SELECT COUNT(id) as count FROM books where available = ? and groupId = ?";
     public static final String FIND_BOOK_FROM_GROUP = "SELECT * FROM books where available = 1 and groupId = ?";
 
@@ -49,9 +49,7 @@ public final class MySQL {
     public static final String CREATE_ORDER_BY_USER = "insert into orders (bookId,userId,date_expected,date_order, place, status,guId) values (?,?,?,?,?,?,?);";
     public static final String USER_ORDERS = "SELECT * FROM orders WHERE userId = ?";
     public static final String ALL_ORDERS = "SELECT * FROM orders";
-    public static final String UPDATE_ORDER_STATUS_TO_CLOSED = "UPDATE orders SET status = CLOSED, date_close = ?, penalty=? WHERE guId = ?";
-    public static final String UPDATE_ORDER_STATUS_TO_OPEN = "UPDATE orders SET status = OPEN WHERE guId = ?";
-    public static final String UPDATE_ORDER_STATUS_TO_CANCEL = "UPDATE orders SET status = CANCEL WHERE guId = ?";
+    public static final String UPDATE_ORDER = "UPDATE orders SET date_borrow=?,date_expected=?,date_order=?,date_close=?,place=?,status=?,penalty=? WHERE id = ?";
     public static final String ORDER_BY_GUID = "SELECT * FROM orders WHERE guId = ?";
 
 

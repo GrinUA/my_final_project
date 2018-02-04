@@ -30,7 +30,6 @@ public class DBManager {
             ThreadLockHandler.setConnection(null);
             tryToClose(con);
         }
-
     }
 
     private void tryToRollback(Connection con) {

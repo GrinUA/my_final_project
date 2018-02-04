@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 @WebFilter
-public class PremissionFilter implements Filter {
+public class PermissionFilter implements Filter {
     private Map<String, Set<String>> accessMap;
     private Set<String> urlsSet;
 
@@ -42,7 +42,7 @@ public class PremissionFilter implements Filter {
                 chain.doFilter(httpRequest, httpResponce);
             } else {
                 httpResponce.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                httpResponce.sendRedirect("404.jsp");
+                httpResponce.sendRedirect("403.jsp");
             }
         } else {
             chain.doFilter(httpRequest, httpResponce);

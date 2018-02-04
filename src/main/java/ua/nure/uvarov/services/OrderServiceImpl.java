@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+
     public List<OrderBean> getAllOrders() {
         return dbManager.execute(() -> {
                     List<OrderBean> result = new ArrayList<>();
@@ -81,13 +82,17 @@ public class OrderServiceImpl implements OrderService {
             return null;
         });
     }
+    public Order getOrderByGuid(String guId) {
+        return dbManager.execute(() -> orderDao.getOrderByGuid(guId)
+        );
+    }
 
-/*    @Override
-    public boolean changeOrderStatus(int guId, OrderStatus orderStatus) {
-        return dbManager.execute(() ->{
-            orderDao.getUserOrders()
-                orderDao.changeOrderStatus(guId, orderStatus.name())
-                        return huy;
-        });
-    }*/
+    @Override
+    public boolean updateOrder(Order order) {
+        return  dbManager.execute(() ->
+            orderDao.update(order));
+
+    }
+
+
 }

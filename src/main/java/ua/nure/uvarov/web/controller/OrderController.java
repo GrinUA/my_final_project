@@ -27,7 +27,7 @@ public class OrderController extends HttpServlet {
         bookGroup = req.getParameter(Parameters.BOOK_ARTICUL);
         String guId = orderService.createOrder(user, bookGroup);
         if (guId != null) {
-            resp.sendRedirect("order.do?key=" + guId);
+            resp.sendRedirect("cabinet.do?activeTab=default");
         } else {
             throw new NotFoundException();
         }

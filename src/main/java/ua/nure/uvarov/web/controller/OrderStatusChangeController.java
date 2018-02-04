@@ -2,7 +2,13 @@ package ua.nure.uvarov.web.controller;
 
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.OrderStatus;
-import ua.nure.uvarov.services.OrderService;
+import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.entity.UserRole;
+import ua.nure.uvarov.exceptions.NotFoundException;
+import ua.nure.uvarov.handler.order.OrderStatusChangeHandler;
+import ua.nure.uvarov.handler.order.OrderStatusChangeToCancel;
+import ua.nure.uvarov.handler.order.OrderStatusChangeToClose;
+import ua.nure.uvarov.handler.order.OrderStatusChangeToOpen;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +16,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/orderStatus.do")
 public class OrderStatusChangeController extends HttpServlet {
-    private OrderService orderService;
+    private Map<OrderStatus, OrderStatusChangeHandler> handlerContainer;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        orderService.changeOrderStatus(Integer.valueOf(req.getParameter(Parameters.GUID)), OrderStatus.valueOf(Parameters.ORDER_STATUS));
-
+        User user = (User) (req.getSession().getAttribute(Parameters.S_USER));
+        if (user.getRole().equals(UserRole.CLIENT)) {
+            if (req.getParameter(Parameters.ORDER_STATUS).equals(OrderStatus.CANCELED.toString())) {
+                handlerContainer.get(OrderStatus.CANCELED).execute(req, resp);
+            } else throw new NotFoundException();
+        }
+        if (user.getRole().equals(UserRole.OPERATOR)) {
+            handlerContainer.get(OrderStatus.valueOf(req.getParameter(Parameters.ORDER_STATUS))).execute(req, resp);
+        }
+        resp.sendRedirect("cabinet.do?activeTab=default");
     }
 
 
     @Override
     public void init() throws ServletException {
-        orderService = (OrderService) getServletContext().getAttribute(Parameters.ORDER_SERVICE);
+        handlerContainer = new HashMap<>();
+        handlerContainer.put(OrderStatus.CLOSED, new OrderStatusChangeToClose());
+        handlerContainer.put(OrderStatus.OPEN, new OrderStatusChangeToOpen());
+        handlerContainer.put(OrderStatus.CANCELED, new OrderStatusChangeToCancel());
     }
 }
