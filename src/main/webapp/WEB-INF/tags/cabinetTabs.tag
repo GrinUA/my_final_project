@@ -29,10 +29,10 @@
                             <c:if test="${user.email != sessionScope.s_user.email}">
                                 <c:choose>
                                     <c:when test="${user.blocked}">
-                                        <tr class="active">
+                                        <tr class="success">
                                     </c:when>
                                     <c:otherwise>
-                                        <tr class="success">
+                                        <tr class="active">
                                     </c:otherwise>
                                 </c:choose>
                                 <td>${user.email}</td>
@@ -107,7 +107,7 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
-      <c:if test="${requestScope.activeTab == 'genre'}">
+        <c:if test="${requestScope.activeTab == 'genre'}">
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=genre">Add new genre</a>
@@ -116,11 +116,135 @@
         </c:if>
     </c:if>
     <c:if test="${sessionScope.s_user.role == 'CLIENT'}">
+        <c:choose>
+            <c:when test="${not empty userOrders}">
+                <table class="table">
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Place</th>
+                    <th>Penalty</th>
+                    <th>Status</th>
+                    <c:forEach items="${userOrders}" var="order">
+                        <c:choose>
+                            <c:when test="${order.status =='CLOSED' or order.status == 'CANCELED'}">
+                                <tr class="success">
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${order.status == 'WAITING'}">
+                                    <tr class="info">
+                                </c:if>
+                                <c:if test="${order.status == 'OPEN'}">
+                                    <c:choose>
+                                        <c:when test="${order.penalty > 0} ">
+                                            <tr class="danger">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                        </c:otherwise>
+                                    </c:choose>
 
+                                </c:if>
+
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${order.guId}</td>
+                        <td>${order.bookGroup.name}</td>
+                        <td>${order.bookGroup.author}</td>
+                        <c:choose>
+                            <c:when test="${order.place == 'true'}">
+                                <td>On hands</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>Reading room</td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${order.penalty}</td>
+                        <td>${order.status.name}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:when>
+            <c:otherwise>
+                Choose a book!
+            </c:otherwise>
+        </c:choose>
+    </c:if>
+    <c:if test="${sessionScope.s_user.role == 'OPERATOR'}">
+        <c:choose>
+            <c:when test="${not empty userOrders}">
+                <table class="table">
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>Place</th>
+                    <th>Penalty</th>
+                    <th>Status</th>
+                    <c:forEach items="${userOrders}" var="order">
+                        <c:choose>
+                            <c:when test="${order.status =='CLOSED' or order.status == 'CANCELED'}">
+                                <tr class="success">
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${order.status == 'WAITING'}">
+                                    <tr class="info">
+                                </c:if>
+                                <c:if test="${order.status == 'OPEN'}">
+                                    <c:choose>
+                                        <c:when test="${order.penalty > 0} ">
+                                            <tr class="danger">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                </c:if>
+
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${order.guId}</td>
+                        <td>${order.user.firstName}</td>
+                        <td>${order.user.lastName}</td>
+                        <td>${order.bookGroup.name}</td>
+                        <td>${order.bookGroup.author}</td>
+                        <c:choose>
+                            <c:when test="${order.place == 'true'}">
+                                <td>On hands</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>Reading room</td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${order.penalty}</td>
+                        <td>${order.status}</td>
+                        <td>
+                            <form action="orderStatus.do" method="post">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                         <select class="custom-select">
+                                            <option selected value="CLOSED">Closed</option>
+                                            <option value="OPEN">Open</option>
+                                             <option value="CANCELED">Canceled</option>
+                                        </select>
+                                        <a class="btn btn-outline-secondary"  type="submit">Change</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:when>
+            <c:otherwise>
+                Choose a book!
+            </c:otherwise>
+        </c:choose>
     </c:if>
 
-<c:if test="${sessionScope.s_user.role == 'ADMIN'}">
-</c:if>
+
 </ul>
 
 

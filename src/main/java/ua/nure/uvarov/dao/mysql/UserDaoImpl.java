@@ -61,8 +61,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getById(int id) {
-        return null;
+        User user;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.USER_BY_ID)) {
+            UserRowMapper userRowMapper = new UserRowMapper();
+            st.setInt(1, id);
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            resultSet.next();
+            user = userRowMapper.mapRow(resultSet);
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return user;
     }
+
 
     @Override
     public int create(User user) {
@@ -135,22 +148,6 @@ public class UserDaoImpl implements UserDao {
         return list;
     }
 
-    @Override
-    public List<User> getUsersByParamether() {
-        List<User> list;
-        Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_USERS)) {
-            list = new ArrayList<>();
-            st.executeQuery();
-            ResultSet resultSet = st.getResultSet();
-            while (!resultSet.isLast()) {
-                resultSet.next();
-                User user = new UserRowMapper().mapRow(resultSet);
-                list.add(user);
-            }
-        } catch (SQLException e) {
-            throw new DataBaseException(e);
-        }
-        return list;
-    }
+
+
 }

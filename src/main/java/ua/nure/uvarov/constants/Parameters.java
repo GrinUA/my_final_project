@@ -40,10 +40,12 @@ public class Parameters {
     public static final String USER_ID = "userid";
     public static final String BORROW_DATE = "date_borrow";
     public static final String EXPECTED_DATE = "date_expected";
-    public static final String ACTUAL_DATE = "date_expected";
+    public static final String ORDER_DATE = "date_order";
+    public static final String CLOSE_DATE = "date_close";
     public static final String PLACE = "place";
     public static final String STATUS = "status";
     public static final String ARCTICUL = "articul";
+    public static final String PENALTY = "penalty";
 
     public static final String S_ERRORS = "s_errors";
     public static final String ERRORS = "errors";
@@ -70,6 +72,7 @@ public class Parameters {
 
     public static final String DEFAULT_IMAGE_VALUE = "default.jpg";
     public static final int ONE_DAY = 86400000;
+    public static final double PERCENT = 20;
 
     public static final String ALL_BOOK_COUNT = "allBookCount";
     public static final String AVAILABLE_BOOK_COUNT = "availableBookCount";

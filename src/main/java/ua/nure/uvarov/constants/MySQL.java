@@ -6,6 +6,7 @@ public final class MySQL {
     public static final String USERS_BLOCK_STATUS = "SELECT blocked FROM users WHERE email = ?";
     public static final String UPDATE_BLOCK_STATUS_BY_EMAIL = "UPDATE users SET blocked = ? WHERE email = ?";
     public static final String USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    public static final String USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     public static final String FIND_ALL_USERS = "SELECT * FROM users";
     public static final String FIND_USERS_BY_PARAMETHER = "SELECT * FROM users";
 
@@ -21,11 +22,12 @@ public final class MySQL {
     public static final String FIND_ALL_GENRES = "SELECT * FROM genres";
     public static final String UPDATE_BOOK_STATUS = "UPDATE books SET available = ? WHERE id = ?";
 
-
+    public static final String GROUP_BY_BOOK = "SELECT * FROM book WHERE groupId = ?";
     public static final String UPDATE_BOOK_GROUP = "UPDATE book_groups SET name=?,author=?,edition=?,publicationdate=?,genreid=?,price=?,description=? WHERE id = ?";
     public static final String CREATE_BOOK_GROUP =
             "INSERT into book_groups (id,name,author,edition,publicationDate,description, price,genreId, image) values (?,?,?,?,?,?,?,?,?)";
     public static final String FIND_BOOK_GROUP_BY_ID = "SELECT * FROM book_groups WHERE id = ?";
+    public static final String FIND_GROUP_BOOK_BY_BOOK = "SELECT  * from book_groups WHERE book_groups.id = (SELECT  groupId from books WHERE books.id = ?)";
     public static final String FIND_ALL_BOOK_GROUP = "SELECT DISTINCT *\n" +
             "FROM (SELECT\n" +
             "        bg.id,\n" +
@@ -45,7 +47,9 @@ public final class MySQL {
 
 
 
-    public static final String CREATE_ORDER_BY_USER = "insert into orders (bookId,userId,date_expected,status,guId) values (?,?,?,?,?);";
+    public static final String CREATE_ORDER_BY_USER = "insert into orders (bookId,userId,date_expected,date_order, place, status,guId) values (?,?,?,?,?,?,?);";
+    public static final String USER_ORDERS = "SELECT * FROM orders WHERE userId = ?";
+    public static final String ALL_ORDERS = "SELECT * FROM orders";
 
 
 

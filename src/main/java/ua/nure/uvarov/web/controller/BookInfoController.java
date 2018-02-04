@@ -30,7 +30,7 @@ public class BookInfoController extends HttpServlet {
             throw new NotFoundException();
         }
         req.setAttribute("bookInfo", bookGroup);
-        req.setAttribute("booksData", orderService.getDataAboutOrderedBooks(bookGroup.getId()));
+        req.setAttribute("booksData", orderService.getCountOfAvailableBooks(bookGroup.getId()));
         req.getRequestDispatcher("WEB-INF/jsp/bookInfo.jsp").forward(req,resp);
     }
 

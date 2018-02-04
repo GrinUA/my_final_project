@@ -9,8 +9,11 @@
 <t:header/>
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8"> <h2> Welcome to cabinet ${sessionScope.s_user.firstName} ${sessionScope.s_user.lastName}!</h2>
+        <div class="col-md-2">   <img class="img-rounded img-responsive" src="images/default.jpg?owner=user" alt="">
+            <h4> ${sessionScope.s_user.firstName}</h4>
+            <h4> ${sessionScope.s_user.lastName}</h4>
+            <h6> ${sessionScope.s_user.email}</h6></div>
+        <div class="col-md-8">
         <div class="panel panel-info">
             <div class="panel-heading">Cabinet</div>
            <t:cabinetTabs/>

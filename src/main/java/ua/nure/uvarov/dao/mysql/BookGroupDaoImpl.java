@@ -1,5 +1,5 @@
 package ua.nure.uvarov.dao.mysql;
-;
+
 import ua.nure.uvarov.constants.MySQL;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.dao.BookGroupDao;
@@ -45,38 +45,38 @@ public class BookGroupDaoImpl implements BookGroupDao {
             st.setString(1, name);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
-            if(resultSet.next()){
+            if (resultSet.next()) {
 
-            Genre genre = new Genre();
-            genre.setId(resultSet.getInt(Parameters.ID));
-            genre.setName(resultSet.getString(Parameters.NAME));
+                Genre genre = new Genre();
+                genre.setId(resultSet.getInt(Parameters.ID));
+                genre.setName(resultSet.getString(Parameters.NAME));
 
-            return genre;}
-            else return null;
+                return genre;
+            } else return null;
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
     }
 
 
-
-
     @Override
-    public boolean isExist(String  id) {
+    public boolean isExist(String id) {
         Connection connection = ThreadLockHandler.getConnection();
         try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_BOOK_GROUP_BY_ID)) {
             st.setString(1, id);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
-          return resultSet.next();
+            return resultSet.next();
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
     }
 
+
     @Override
     public BookGroup getById(int id) {
         throw new UnsupportedOperationException();
+
     }
 
     @Override
@@ -151,7 +151,7 @@ public class BookGroupDaoImpl implements BookGroupDao {
             st.setDate(4, new java.sql.Date(bookGroup.getPublicationDate().getTime()));
             st.setInt(5, bookGroup.getGenre().getId());
             st.setDouble(6, bookGroup.getPrice());
-            st.setString(7,bookGroup.getDescription());
+            st.setString(7, bookGroup.getDescription());
             st.setString(8, bookGroup.getId());
             st.executeUpdate();
             return true;
@@ -215,8 +215,8 @@ public class BookGroupDaoImpl implements BookGroupDao {
     public int getBookCountByState(boolean available, String groupId) {
         Connection connection = ThreadLockHandler.getConnection();
         try (PreparedStatement st = connection.prepareStatement(MySQL.COUNT_BOOKS_BY_STATE_AVAILABLE)) {
-            st.setInt(1, available? 1 : 0);
-            st.setString(2,groupId);
+            st.setInt(1, available ? 1 : 0);
+            st.setString(2, groupId);
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             resultSet.next();
@@ -234,9 +234,25 @@ public class BookGroupDaoImpl implements BookGroupDao {
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
             resultSet.next();
-            return  new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
+            return new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
     }
+
+    @Override
+    public BookGroup getByBook(int id) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_GROUP_BOOK_BY_BOOK)) {
+            st.setInt(1, id);
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            resultSet.next();
+            return new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+    }
+
+
 }

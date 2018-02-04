@@ -8,10 +8,28 @@ public class Order {
     private int userId;
     private Date borrowDate;
     private Date expectedDate;
-    private Date actualDate;
+    private Date orderDate;
+    private Date closeDate;
     private boolean place;
     private OrderStatus status;
     private String guId;
+    private double penalty;
+
+    public Date getCloseDate() {
+        return closeDate;
+    }
+
+    public void setCloseDate(Date closeDate) {
+        this.closeDate = closeDate;
+    }
+
+    public double getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(double penalty) {
+        this.penalty = penalty;
+    }
 
     public OrderStatus getStatus() {
         return status;
@@ -65,12 +83,12 @@ public class Order {
         this.expectedDate = expectedDate;
     }
 
-    public Date getActualDate() {
-        return actualDate;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setActualDate(Date actualDate) {
-        this.actualDate = actualDate;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     public boolean isPlace() {
@@ -87,5 +105,22 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", bookId=" + bookId +
+                ", userId=" + userId +
+                ", borrowDate=" + borrowDate +
+                ", expectedDate=" + expectedDate +
+                ", orderDate=" + orderDate +
+                ", closeDate=" + closeDate +
+                ", place=" + place +
+                ", status=" + status +
+                ", guId='" + guId + '\'' +
+                ", penalty=" + penalty +
+                '}';
     }
 }

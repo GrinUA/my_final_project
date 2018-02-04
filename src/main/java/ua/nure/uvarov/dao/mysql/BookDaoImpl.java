@@ -5,6 +5,7 @@ import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.dao.BookDao;
 import ua.nure.uvarov.dao.mapper.BookGroupRowMapper;
 import ua.nure.uvarov.entity.Book;
+import ua.nure.uvarov.entity.BookGroup;
 import ua.nure.uvarov.exceptions.DataBaseException;
 import ua.nure.uvarov.transaction.ThreadLockHandler;
 
@@ -22,7 +23,6 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getBooksByGroup(int id) {
         List<Book> list;
-
         Connection connection = ThreadLockHandler.getConnection();
         try (PreparedStatement st = connection.prepareStatement(MySQL.BOOK_BY_GROUP)) {
             list = new ArrayList<>();
@@ -42,6 +42,8 @@ public class BookDaoImpl implements BookDao {
         }
         return list;
     }
+
+
 
     @Override
     public boolean isAvailableById(int id) {

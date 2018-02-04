@@ -33,7 +33,7 @@
                         <c:choose>
                             <c:when test="${not empty sessionScope.s_user}">
                                 <c:choose>
-                                    <c:when test="${booksData.get(availableBookCount) > 0}">
+                                    <c:when test="${booksData.availableBookCount > 0}">
                                         <form action="order.do" method="post" >
                                             <input hidden name="articul" value="${bookInfo.id}">
                                             <div class="btn-group">

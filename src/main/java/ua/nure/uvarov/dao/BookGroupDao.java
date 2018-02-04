@@ -9,6 +9,7 @@ import java.util.List;
 public interface BookGroupDao extends GenericDao<BookGroup> {
     List<BookGroup> getAll();
     BookGroup getById(String id);
+    BookGroup getByBook(int id);
     BookGroup getBookGroupByName(String name);
     BookGroup getBookGroupByAuthor(String author);
     List<BookGroup> getBookGroupByGenre(int id);
