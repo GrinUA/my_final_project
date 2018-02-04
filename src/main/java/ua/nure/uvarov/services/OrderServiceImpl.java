@@ -7,10 +7,7 @@ import ua.nure.uvarov.dao.BookDao;
 import ua.nure.uvarov.dao.BookGroupDao;
 import ua.nure.uvarov.dao.OrderDao;
 import ua.nure.uvarov.dao.UserDao;
-import ua.nure.uvarov.entity.Book;
-import ua.nure.uvarov.entity.BookGroup;
-import ua.nure.uvarov.entity.Order;
-import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.entity.*;
 import ua.nure.uvarov.transaction.DBManager;
 
 import java.util.ArrayList;
@@ -84,4 +81,13 @@ public class OrderServiceImpl implements OrderService {
             return null;
         });
     }
+
+/*    @Override
+    public boolean changeOrderStatus(int guId, OrderStatus orderStatus) {
+        return dbManager.execute(() ->{
+            orderDao.getUserOrders()
+                orderDao.changeOrderStatus(guId, orderStatus.name())
+                        return huy;
+        });
+    }*/
 }

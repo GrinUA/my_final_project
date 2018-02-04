@@ -62,7 +62,7 @@ public class Parameters {
 
     public static final String PRICE = "price";
     public static final String DESCRIPTION = "description";
-    public static final String GUID = "guid";
+    public static final String GUID = "guId";
     public static final String IMAGE = "image";
 
     public static final String BOOK_GROUP_LIST = "bookGroups";
@@ -78,6 +78,7 @@ public class Parameters {
     public static final String AVAILABLE_BOOK_COUNT = "availableBookCount";
     public static final String ORDERED_BOOK_COUNT = "orderedBookCount";
     public static final String ORDER_ID = "orderId";
+    public static final String ORDER_STATUS = "orderStatus";
 
     public static final String ACTIVE_TAB = "activeTab";
     public static final String TAB_USERS = "usersTab";

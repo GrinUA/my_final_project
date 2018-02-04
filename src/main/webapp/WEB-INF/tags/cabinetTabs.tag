@@ -222,9 +222,10 @@
                         <td>${order.status}</td>
                         <td>
                             <form action="orderStatus.do" method="post">
+                                <input hidden value="${order.guId}" name="guId">
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                         <select class="custom-select">
+                                         <select name="orderStatus" class="custom-select">
                                             <option selected value="CLOSED">Closed</option>
                                             <option value="OPEN">Open</option>
                                              <option value="CANCELED">Canceled</option>

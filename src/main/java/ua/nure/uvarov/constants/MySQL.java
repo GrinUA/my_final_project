@@ -46,13 +46,13 @@ public final class MySQL {
     public static final String COUNT_ORDERS_FOR_BOOK_GROUP = "SELECT count(o.id) as count from books as b INNER JOIN  orders as o ON b.id = o.bookid where b.groupid = ? and status in ('WAITING','OPEN') ";
 
 
-
     public static final String CREATE_ORDER_BY_USER = "insert into orders (bookId,userId,date_expected,date_order, place, status,guId) values (?,?,?,?,?,?,?);";
     public static final String USER_ORDERS = "SELECT * FROM orders WHERE userId = ?";
     public static final String ALL_ORDERS = "SELECT * FROM orders";
-
-
-
+    public static final String UPDATE_ORDER_STATUS_TO_CLOSED = "UPDATE orders SET status = CLOSED, date_close = ?, penalty=? WHERE guId = ?";
+    public static final String UPDATE_ORDER_STATUS_TO_OPEN = "UPDATE orders SET status = OPEN WHERE guId = ?";
+    public static final String UPDATE_ORDER_STATUS_TO_CANCEL = "UPDATE orders SET status = CANCEL WHERE guId = ?";
+    public static final String ORDER_BY_GUID = "SELECT * FROM orders WHERE guId = ?";
 
 
 }

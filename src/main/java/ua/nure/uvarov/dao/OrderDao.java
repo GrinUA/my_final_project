@@ -15,5 +15,9 @@ public interface OrderDao {
    String createOrderByUser(User user,Book book);
    List<Order> getAllOrders();
    List<Order> getUserOrders(int id);
+   Order getOrderByGuid(String guId);
    boolean isUserOrders(int id);
+   boolean changeOrderStatusToClosed(Order order);
+    boolean changeOrderStatusToCancel(Order order);
+    boolean changeOrderStatusToOpen(Order order);
 }

@@ -1,6 +1,7 @@
 package ua.nure.uvarov.services;
 import ua.nure.uvarov.bean.OrderBean;
 import ua.nure.uvarov.entity.Order;
+import ua.nure.uvarov.entity.OrderStatus;
 import ua.nure.uvarov.entity.User;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface OrderService {
     List<OrderBean> getAllOrders();
     Map<String,Integer> getCountOfAvailableBooks(String groupId);
     String createOrder(User user, String bookGroup);
+   /* boolean changeOrderStatus(int id, OrderStatus orderStatus);*/
 }

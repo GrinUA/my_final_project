@@ -56,6 +56,11 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public List<Order> getAllOrders() {
+        return null;
+    }
+
+    @Override
     public List<Order> getUserOrders(int id) {
         List<Order> list;
         Connection connection = ThreadLockHandler.getConnection();
@@ -75,23 +80,26 @@ public class OrderDaoImpl implements OrderDao {
         return list;
     }
 
-    public List<Order> getAllOrders() {
-        List<Order> list;
+    @Override
+    public Order getOrderByGuid(String guId) {
+        return null;
+    }
+
+    public Order OrderDaoImpl(String guId) {
         Connection connection = ThreadLockHandler.getConnection();
-        try (PreparedStatement st = connection.prepareStatement(MySQL.ALL_ORDERS)) {
-            list = new ArrayList<>();
+        Order order = null;
+        try (PreparedStatement st = connection.prepareStatement(MySQL.ORDER_BY_GUID)) {
             st.executeQuery();
             ResultSet resultSet = st.getResultSet();
-            while (!resultSet.isLast()) {
-                resultSet.next();
-                Order order = new OrderRowMapper().mapRow(resultSet);
-                list.add(order);
-            }
+         if(resultSet.next()) {
+            order = new OrderRowMapper().mapRow(resultSet);
+         }
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }
-        return list;
+        return order;
     }
+
 
     @Override
     public boolean isUserOrders(int id) {
@@ -104,6 +112,30 @@ public class OrderDaoImpl implements OrderDao {
             throw new DataBaseException(e);
         }
         return result;
+    }
+
+    @Override
+    public boolean changeOrderStatusToClosed(Order order) {
+            Connection connection = ThreadLockHandler.getConnection();
+            try (PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_ORDER_STATUS_TO_CLOSED)) {
+                st.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+
+                st.execute();
+                return true;
+            } catch (SQLException e) {
+                throw new DataBaseException(e);
+            }
+        }
+
+
+    @Override
+    public boolean changeOrderStatusToCancel(Order order) {
+        return false;
+    }
+
+    @Override
+    public boolean changeOrderStatusToOpen(Order order) {
+        return false;
     }
 
 

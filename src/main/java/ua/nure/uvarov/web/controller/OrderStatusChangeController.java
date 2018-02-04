@@ -1,6 +1,7 @@
 package ua.nure.uvarov.web.controller;
 
 import ua.nure.uvarov.constants.Parameters;
+import ua.nure.uvarov.entity.OrderStatus;
 import ua.nure.uvarov.services.OrderService;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,8 @@ public class OrderStatusChangeController extends HttpServlet {
     private OrderService orderService;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        orderService.changeOrderStatus(Integer.valueOf(req.getParameter(Parameters.GUID)), OrderStatus.valueOf(Parameters.ORDER_STATUS));
+
     }
 
 
