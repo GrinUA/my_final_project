@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 
 <header id="header">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top text-20" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">

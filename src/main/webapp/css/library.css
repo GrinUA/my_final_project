@@ -4,10 +4,56 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 
-body {
-  background-size: 100% 100%;
-  background: url("/imgs/background.jpg") fixed;
+/*body {
+
+
+  !* Center and scale the image nicely *!
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url("/imgs/background3.jpg") fixed;
   padding-top: 54px;
+}*/
+
+body, html {
+  font-size: 14px;
+  color: #212529;
+  font-family: Lora,'Times New Roman',serif;
+  background: url("/imgs/background.jpg") fixed;
+}
+
+.masthead {
+  margin-bottom: 50px;
+  background: no-repeat center center;
+  background-color: #868e96;
+  background-attachment: scroll;
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.color-white{
+  color: white;
+}
+
+.bottom-5{
+  bottom: 5px;
+}
+
+.text-20{
+  font-size: 20px;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #212529;
+  opacity: .5;
 }
 
 
