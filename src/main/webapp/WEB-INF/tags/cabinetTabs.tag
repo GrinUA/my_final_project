@@ -7,8 +7,8 @@
         <c:if test="${requestScope.activeTab == 'usersTab'}">
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=booksTab">Books</a></li>
-            <li role="presentation"><a href="createBook.do">Create book</a>
-            </li>
+            <li role="presentation"><a href="createBook.do">Create book</a></li>
+            <li role="presentation"><a href="cabinet.do?activeTab=penaltyTab">Show penaltys</a></li>
             <c:choose>
                 <c:when test="${not empty userList}">
                     <%--<t:pages />--%>
@@ -40,17 +40,31 @@
                                     <c:when test="${user.blocked}">
                                         <input type="hidden" name="userStatus" value="unblock"/>
                                         <button type="submit" class="btn btn-success">Unblock</button>
-                                        </td>
+
                                     </c:when>
                                     <c:otherwise>
                                         <input type="hidden" name="userStatus" value="block"/>
-                                        <button type="submit" class="btn btn-danger">&ensp;Block&ensp;
-                                        </button>
-                                        </td>
+                                        <button type="submit" class="btn btn-danger">&ensp;Block&ensp;</button>
                                     </c:otherwise>
                                 </c:choose>
                                 </form>
+                                </td>
                                 <td>
+                                    <form action="operatorStatus.do" method="post">
+                                        <input type="hidden" name="email" value="${user.email}"/>
+                                        <input type="hidden" name="role" value="${user.role}"/>
+                                        <c:choose>
+                                            <c:when test="${user.role == 'CLIENT'}">
+                                                <button type="submit" class="btn btn-success">Make operator</button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <button type="submit" class="btn btn-danger">&ensp;Delete operator
+                                                </button>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </form>
+                                <td>
+
                                 </tr>
                             </c:if>
                         </c:forEach>
@@ -66,6 +80,8 @@
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
             <li role="presentation"><a href="createBook.do">Create book</a>
+            </li>
+            <li role="presentation"><a href="cabinet.do?activeTab=penaltyTab">Show penaltys</a></li>
             <c:choose>
                 <c:when test="${not empty bookList}">
                     <%--<t:pages />--%>
@@ -105,7 +121,27 @@
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
             <li role="presentation"><a href="createBook.do">Create book</a>
             </li>
-            <form action="" add new genre></form>
+            <li role="presentation"><a href="cabinet.do?activeTab=penaltyTab">Show penaltys</a></li>
+        </c:if>
+        <c:if test="${requestScope.activeTab == 'penaltyTab'}">
+            <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
+            <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
+            <li role="presentation"><a href="createBook.do">Create book</a>
+            </li>
+            <li role="presentation"  class="active"><a href="cabinet.do?activeTab=penaltyTab">Show penaltys</a></li>
+                    <%--<t:pages />--%>
+                    <table class="table">
+                        <th>Name</th>
+                        <th>Total penalty</th>
+                        <c:forEach items="${penalty}" var="penalty">
+                            <c:if test="${penalty.value > 0}">
+                            <tr class="success">
+                                <td>${penalty.key}</td>
+                              <td>${penalty.value}</td>
+                            </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
         </c:if>
     </c:if>
     <c:if test="${sessionScope.s_user.role == 'CLIENT'}">
@@ -115,7 +151,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Author</th>
-                    <th>Place</th>
+                    <th>Date of return</th>
                     <th>Penalty</th>
                     <th>Status</th>
                     <c:forEach items="${userOrders}" var="order">
@@ -144,16 +180,17 @@
                         <td>${order.guId}</td>
                         <td>${order.bookGroup.name}</td>
                         <td>${order.bookGroup.author}</td>
-                        <c:choose>
-                            <c:when test="${order.place == 'true'}">
-                                <td>On hands</td>
-                            </c:when>
-                            <c:otherwise>
-                                <td>Reading room</td>
-                            </c:otherwise>
-                        </c:choose>
+                        <td><c:if test="${ not empty order.expectedDate}"><fmt:formatDate
+                                pattern="dd MMM yyyy"
+                                value="${order.expectedDate}"/></c:if>
+                        <c:if test="${empty order.expectedDate}">
+                            Book not borrowed
+                        </c:if>
+                        </td>
+
                         <td>${order.penalty}</td>
                         <td>${order.status}</td>
+
                         <c:if test="${order.status == 'WAITING'}">
                             <td>
                                 <form action="orderStatus.do" method="post">
@@ -187,43 +224,42 @@
                         <th>Surname</th>
                         <th>Book</th>
                         <th>Author</th>
-                        <th>Place</th>
+                        <th>Date of return</th>
                         <th>Penalty</th>
                         <th>Status</th>
                         <c:forEach items="${userOrders}" var="order">
                             <c:if test="${order.status == 'OPEN'}">
-                                </tr>
-                                <td>${order.guId}</td>
-                                <td>${order.user.firstName}</td>
-                                <td>${order.user.lastName}</td>
-                                <td>${order.bookGroup.name}</td>
-                                <td>${order.bookGroup.author}</td>
-                                <c:choose>
-                                    <c:when test="${order.place == 'true'}">
-                                        <td>On hands</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>Reading room</td>
-                                    </c:otherwise>
-                                </c:choose>
-                                <td>${order.penalty}</td>
-                                <td>${order.status}</td>
-                                <td>
-                                    <form action="orderStatus.do" method="post">
-                                        <input hidden value="${order.guId}" name="guId">
-                                        <input hidden value="${order.bookGroup.price}" name="price">
-                                        <div class="input-group">
-                                            <div class="input-group-append">
+                                <tr>
+                                    <td>${order.guId}</td>
+                                    <td>${order.user.firstName}</td>
+                                    <td>${order.user.lastName}</td>
+                                    <td>${order.bookGroup.name}</td>
+                                    <td>${order.bookGroup.author}</td>
+                                    <td><c:if test="${ not empty order.expectedDate}"><fmt:formatDate
+                                            pattern="dd MMM yyyy"
+                                            value="${order.expectedDate}"/></c:if>
+                                        <c:if test="${empty order.expectedDate}">
+                                            Book not borrowed
+                                        </c:if>
+                                    </td>
+                                    <td>${order.penalty}</td>
+                                    <td>${order.status}</td>
+                                    <td>
+                                        <form action="orderStatus.do" method="post">
+                                            <input hidden value="${order.guId}" name="guId">
+                                            <input hidden value="${order.bookGroup.price}" name="price">
+                                            <div class="input-group">
+                                                <div class="input-group-append">
 
-                                                <select name="orderStatus" class="custom-<select name=">
-                                                    <option selected value="CLOSED">Closed</option>
-                                                </select>
-                                                <button type="submit">Change</button>
+                                                    <select name="orderStatus" class="custom-<select name=">
+                                                        <option selected value="CLOSED">Closed</option>
+                                                    </select>
+                                                    <button type="submit">Change</button>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </td>
+                                        </form>
+                                    </td>
                                 </tr>
                             </c:if>
                         </c:forEach>
@@ -240,7 +276,7 @@
                         <th>Surname</th>
                         <th>Book</th>
                         <th>Author</th>
-                        <th>Place</th>
+                        <th>Date of return</th>
                         <th>Penalty</th>
                         <th>Status</th>
                         <c:forEach items="${userOrders}" var="order">
@@ -251,14 +287,13 @@
                                 <td>${order.user.lastName}</td>
                                 <td>${order.bookGroup.name}</td>
                                 <td>${order.bookGroup.author}</td>
-                                <c:choose>
-                                    <c:when test="${order.place == 'true'}">
-                                        <td>On hands</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>Reading room</td>
-                                    </c:otherwise>
-                                </c:choose>
+                                <td><c:if test="${ not empty order.closeDate}"><fmt:formatDate
+                                        pattern="dd MMM yyyy"
+                                        value="${order.closeDate}"/></c:if>
+                                    <c:if test="${empty order.closeDate}">
+                                        Book not borrowed
+                                    </c:if>
+                                </td>
                                 <td>${order.penalty}</td>
                                 <td>${order.status}</td>
                                 </tr>
@@ -277,7 +312,7 @@
                         <th>Surname</th>
                         <th>Book</th>
                         <th>Author</th>
-                        <th>Place</th>
+                        <th>Date of return</th>
                         <th>Penalty</th>
                         <th>Status</th>
                         <c:forEach items="${userOrders}" var="order">
@@ -288,14 +323,13 @@
                                     <td>${order.user.lastName}</td>
                                     <td>${order.bookGroup.name}</td>
                                     <td>${order.bookGroup.author}</td>
-                                    <c:choose>
-                                        <c:when test="${order.place == 'true'}">
-                                            <td>On hands</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>Reading room</td>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <td><c:if test="${ not empty order.closeDate}"><fmt:formatDate
+                                            pattern="dd MMM yyyy"
+                                            value="${order.closeDate}"/></c:if>
+                                        <c:if test="${empty order.closeDate}">
+                                            Book not borrowed
+                                        </c:if>
+                                    </td>
                                     <td>${order.penalty}</td>
                                     <td>${order.status}</td>
                                 </tr>
@@ -314,7 +348,7 @@
                         <th>Surname</th>
                         <th>Book</th>
                         <th>Author</th>
-                        <th>Place</th>
+                        <th>Borrow to</th>
                         <th>Penalty</th>
                         <th>Status</th>
                         <c:forEach items="${userOrders}" var="order">
@@ -325,14 +359,13 @@
                                     <td>${order.user.lastName}</td>
                                     <td>${order.bookGroup.name}</td>
                                     <td>${order.bookGroup.author}</td>
-                                    <c:choose>
-                                        <c:when test="${order.place == 'true'}">
-                                            <td>On hands</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>Reading room</td>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <td><c:if test="${ not empty order.expectedDate}"><fmt:formatDate
+                                            pattern="dd MMM yyyy"
+                                            value="${order.expectedDate}"/></c:if>
+                                        <c:if test="${empty order.expectedDate}">
+                                            Book not borrowed
+                                        </c:if>
+                                    </td>
                                     <td>${order.penalty}</td>
                                     <td>${order.status}</td>
                                     <td>
@@ -363,7 +396,6 @@
             </c:otherwise>
         </c:choose>
     </c:if>
-
 
 </ul>
 

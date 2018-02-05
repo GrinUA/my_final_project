@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><fmt:message key="language"/> <span class="caret"></span></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><fmt:message key="language"/></button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="locale?lang=en">English</a></li>
                             <li><a href="locale?lang=ru">Русский</a></li>

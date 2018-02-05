@@ -86,6 +86,7 @@ public class Parameters {
     public static final String ACTIVE_TAB = "activeTab";
     public static final String TAB_USERS = "usersTab";
     public static final String TAB_BOOKS = "booksTab";
+    public static final String TAB_PENALTY = "penaltyTab";
 
 
     public static final String TAB_OPEN = "openTab";

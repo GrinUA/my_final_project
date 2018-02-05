@@ -3,6 +3,7 @@ package ua.nure.uvarov.services;
 
 import ua.nure.uvarov.dao.UserDao;
 import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.entity.UserRole;
 import ua.nure.uvarov.transaction.DBManager;
 import java.util.List;
 
@@ -60,6 +61,18 @@ public class UserServiceImpl implements UserService {
     public boolean block(String email) {
         return dbManager.execute(() ->
                 userDao.changeBlockStatus(email, true));
+    }
+
+    @Override
+    public boolean createOperator(String email) {
+        return dbManager.execute(() ->
+                userDao.changeRole(email, UserRole.OPERATOR));
+    }
+
+    @Override
+    public boolean deleteOperator(String email) {
+        return dbManager.execute(() ->
+                userDao.changeRole(email, UserRole.CLIENT));
     }
 
     @Override

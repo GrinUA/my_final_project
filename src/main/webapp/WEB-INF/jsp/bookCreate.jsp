@@ -19,7 +19,7 @@
                     <form action="createBook.do" method="post">
                         <div class="col-sm-6 col-md-4">
                             <img class="img-rounded img-responsive" src="/images/${bookInfo.image}?owner=user" alt="">
-                            <button class="btn btn-lg btn-primary btn-block">Change image</button>
+                            <a href="#"  class="btn btn-lg btn-primary btn-block">Change image</a>
                         </div>
                         <div class="col-sm-6 col-md-8">
                             <h4>
@@ -40,7 +40,7 @@
                         <p><input name="count" type="number" class="form-control" placeholder="Amount" required=""></p>
                         <h3>DESCRIPTION</h3>
                             <p><i><input name="description" type="text" class="form-control" placeholder="Description" required=""></i></p>
-                             <input class="btn btn-lg btn-primary btn-block" type="submit">Create</input>
+                             <input class="btn btn-lg btn-primary btn-block" type="submit">
                     </form>
                 </div>
             </div>

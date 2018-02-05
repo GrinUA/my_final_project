@@ -25,6 +25,18 @@
     <constraint>
         <role>admin</role>
         <url>/editBook.do</url>
+        <url>/createBook.do</url>
+       <url>/operatorStatus.do</url>
+        <url>/userStatus.do</url>
+    </constraint>
+    <constraint>
+        <role>client</role>
+        <url>/order.do</url>
+    </constraint>
+    <constraint>
+        <role>client</role>
+        <role>operator</role>
+        <url>/orderStatus.do</url>
     </constraint>
 
 </security>

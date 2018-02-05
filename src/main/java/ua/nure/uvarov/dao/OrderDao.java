@@ -14,6 +14,7 @@ public interface OrderDao {
     int getOrderCountForBooksGroup(String groupId);
    String createOrderByUser(User user,Book book);
    List<Order> getAllOrders();
+   List<Order> getAllOrdersWithPenalty();
    List<Order> getUserOrders(int id);
    Order getOrderByGuid(String guId);
    boolean isUserOrders(int id);

@@ -18,6 +18,7 @@ public interface BookService {
    String createBookGroup(BookGroup bookGroup);
     BookGroup getBookGroup(String guid);
     List<BookGroup> getBookGroups();
+    List<BookGroup> getBookGroupsWithPenalty();
     boolean updateBookGroup(BookGroup bookGroup);
     BookGroup getBook (HttpServletRequest request);
     boolean updateBookStatus(int id, boolean status);

@@ -76,6 +76,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookGroup> getBookGroupsWithPenalty() {
+        return dbManager.execute(() -> bookGroupDao.getAll());
+    }
+
+    @Override
     public boolean updateBookGroup(BookGroup bookGroup) {
 
         return dbManager.execute(() ->

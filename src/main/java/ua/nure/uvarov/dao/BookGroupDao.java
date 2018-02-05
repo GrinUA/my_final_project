@@ -10,6 +10,7 @@ import java.util.List;
 public interface BookGroupDao extends GenericDao<BookGroup> {
     List<BookGroup> getAll();
     List<BookGroup> findByCondition(FilterParams filterParams);
+    List<BookGroup> getAllWithPenalty();
 String createBookGroup(BookGroup bookGroup);
     BookGroup getById(String id);
     BookGroup getByBook(int id);

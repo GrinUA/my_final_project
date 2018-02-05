@@ -4,6 +4,7 @@ import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.dao.UserDao;
 import ua.nure.uvarov.dao.mapper.UserRowMapper;
 import ua.nure.uvarov.entity.User;
+import ua.nure.uvarov.entity.UserRole;
 import ua.nure.uvarov.exceptions.DataBaseException;
 import ua.nure.uvarov.transaction.ThreadLockHandler;
 
@@ -123,6 +124,19 @@ public class UserDaoImpl implements UserDao {
             st.setInt(1, blocked?1:0);
             st.setString(2, email);
           st.execute();
+            return true;
+        }catch (SQLException e){
+            throw new DataBaseException(e);
+        }
+    }
+
+    @Override
+    public boolean changeRole(String email, UserRole role) {
+        Connection connection = ThreadLockHandler.getConnection();
+        try(PreparedStatement st = connection.prepareStatement(MySQL.UPDATE_ROLE_BY_EMAIL)) {
+            st.setString(1, role.name());
+            st.setString(2, email);
+            st.execute();
             return true;
         }catch (SQLException e){
             throw new DataBaseException(e);

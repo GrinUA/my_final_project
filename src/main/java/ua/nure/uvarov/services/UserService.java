@@ -23,6 +23,10 @@ public interface UserService {
 
     boolean block(String email);
 
+    boolean createOperator(String email);
+
+    boolean deleteOperator(String email);
+
     User tryToLogIn(User userBean);
 
     List<User> getAllUsers();

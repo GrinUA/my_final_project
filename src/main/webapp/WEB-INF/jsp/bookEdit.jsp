@@ -20,39 +20,46 @@
 
                         <div class="col-sm-6 col-md-4">
                             <img class="img-rounded img-responsive" src="/images/${bookInfo.image}?owner=user" alt="">
-                            <button class="btn btn-lg btn-primary btn-block">Change image</button>
+                            <a href="" class="btn btn-lg btn-primary btn-block">Change image</a>
                         </div>
                         <div class="col-sm-6 col-md-8">
-                            <input name="id"  hidden value="${bookInfo.id}" required="">
+                            <input name="id" hidden value="${bookInfo.id}" required="">
                             <h4>
                                 Name: <input name="name" type="text" class="form-control" placeholder="Name"
-                                       value="${bookInfo.name}" required="">
+                                             value="${bookInfo.name}" required="">
                             </h4>
                             <p>
                             <p>Author: <input name="author" type="text" class="form-control" placeholder="Author"
-                                      value="${bookInfo.author}" required=""></p>
+                                              value="${bookInfo.author}" required=""></p>
                             <p>Edition: <input name="edition" type="text" class="form-control" placeholder="Edition"
-                                               value="${bookInfo.edition}" required=""> </p>
-                                <fmt:formatDate value="${bookInfo.publicationDate}" var="result"
-                                               pattern="yyyy-MM-dd" />
-                             <p>  Publication date:  <input name="publicationDate" type="date" class="form-control"
-                                       value='${result}' required=""></p>
-                            <p>Genre: <input name="genreName" type="text" class="form-control" placeholder="Genre"
-                                             value="${bookInfo.genre.name}" required=""></p>
-                            <p>Price: <input name="price" type="text" class="form-control" placeholder="Price"
-                                             value="${bookInfo.price}" required=""></p>
-                            <h3>DESCRIPTION</h3>
-                            <p><i><input name="description" type="text" class="form-control" placeholder="Description"
-                                         value="${bookInfo.description}" required=""></i></p>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
-                            <!-- Split button -->
+                                               value="${bookInfo.edition}" required=""></p>
+                            <fmt:formatDate value="${bookInfo.publicationDate}" var="result"
+                                            pattern="yyyy-MM-dd"/>
+                            <p> Publication date: <input name="publicationDate" type="date" class="form-control"
+                                                         value='${result}' required=""></p>
+                            <p>Genre: <select class="form-control" name="genreName">
+                                <option selected value="${bookInfo.genre.name}">${bookInfo.genre.name}</option>
+                                <c:forEach items="${genres}" var="genre">
+                                    <option value="${genre.name}">${genre.name}</option>
+                                </c:forEach>
+                            </select>
                         </div>
+                        </p>
+                        <p>Price: <input name="price" type="text" class="form-control" placeholder="Price"
+                                         value="${bookInfo.price}" required=""></p>
+                        <h3>DESCRIPTION</h3>
+                        <p><i><input name="description" type="text" class="form-control" placeholder="Description"
+                                     value="${bookInfo.description}" required=""></i></p>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+                        <!-- Split button -->
                     </form>
                 </div>
+
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
+    <div class="col-md-2"></div>
+</div>
 </div>
 </body>
 </html>

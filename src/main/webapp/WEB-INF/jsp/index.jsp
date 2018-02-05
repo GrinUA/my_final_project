@@ -46,7 +46,6 @@
                                                                     pattern="MMM yyyy"
                                                                     value="${topBook.publicationDate}"/></p>
                                                             <p>Genre: ${topBook.genre.name}</p>
-                                                            <p>${topBook.description}</p>
 
                                                         </div>
                                                         <div class="col-md-1"></div>
@@ -101,10 +100,8 @@
                                         <p>Edition: ${bookG.edition} / <fmt:formatDate pattern="MMM yyyy"
                                                                                        value="${bookG.publicationDate}"/></p>
                                         <p>Genre: ${bookG.genre.name}</p>
-                                        <p>${bookG.description}</p>
                                     </div>
                                     <div class="ratings">
-                                        <p class="pull-right">12 reviews</p>
                                         <p>
                                             <span class="glyphicon glyphicon-star"></span>
                                             <span class="glyphicon glyphicon-star"></span>

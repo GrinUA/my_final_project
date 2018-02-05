@@ -74,6 +74,25 @@ public class OrderDaoImpl implements OrderDao {
         return list;
     }
 
+
+    public List<Order> getAllOrdersWithPenalty() {
+        List<Order> list;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.ALL_ORDERS)) {
+            list = new ArrayList<>();
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            while (!resultSet.isLast()) {
+                resultSet.next();
+                Order order = new OrderRowMapper().mapRow(resultSet);
+                list.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return list;
+    }
+
     @Override
     public List<Order> getUserOrders(int id) {
         List<Order> list;

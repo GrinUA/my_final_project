@@ -63,6 +63,25 @@ public class OrderServiceImpl implements OrderService {
         );
     }
 
+    public Map<String, Double> getAllOrdersWithPenalty() {
+        return dbManager.execute(() -> {
+            Map<String, Double> map = new HashMap<>();
+                    List<Order> list = orderDao.getAllOrders();
+            for (int i = 0; i < list.size(); i++) {
+                BookGroup bookGroup = bookGroupDao.getByBook(list.get(i).getBookId());
+                if(map.containsKey(bookGroup.getName())){
+                    map.put(bookGroup.getName(), map.get(bookGroup.getName()) + list.get(i).getPenalty());
+            }
+            else {
+                    map.put(bookGroup.getName(), list.get(i).getPenalty());
+                }
+
+                }
+
+            return map; });}
+
+
+
     @Override
     public Map<String, Integer> getCountOfAvailableBooks(String groupId) {
         Map<String, Integer> orderedBooks = new HashMap<>();

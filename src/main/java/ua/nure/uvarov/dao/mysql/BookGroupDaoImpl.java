@@ -154,6 +154,25 @@ public class BookGroupDaoImpl implements BookGroupDao {
     }
 
     @Override
+    public List<BookGroup> getAllWithPenalty() {
+        List<BookGroup> list;
+        Connection connection = ThreadLockHandler.getConnection();
+        try (PreparedStatement st = connection.prepareStatement(MySQL.FIND_ALL_BOOK_GROUP)) {
+            list = new ArrayList<>();
+            st.executeQuery();
+            ResultSet resultSet = st.getResultSet();
+            while (!resultSet.isLast()) {
+                resultSet.next();
+                BookGroup bookGroup = new BookGroupRowMapper(genreByIdFunction).mapRow(resultSet);
+                list.add(bookGroup);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseException(e);
+        }
+        return list;
+    }
+
+    @Override
     public List<BookGroup> getBookGroupByGenre(int id) {
         List<BookGroup> list;
 
@@ -292,4 +311,11 @@ public class BookGroupDaoImpl implements BookGroupDao {
     }
 
 
+    public Function<Integer, Genre> getGenreByIdFunction() {
+        return genreByIdFunction;
+    }
+
+    public void setGenreByIdFunction(Function<Integer, Genre> genreByIdFunction) {
+        this.genreByIdFunction = genreByIdFunction;
+    }
 }
