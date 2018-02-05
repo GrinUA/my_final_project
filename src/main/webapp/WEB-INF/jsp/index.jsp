@@ -30,7 +30,6 @@
                                     </ol>
                                     <div class="carousel-inner">
                                         <c:forEach var="i" begin="1" end="${sessionScope.bookTopGroups.size()}">
-                                            <c:out value="${sessionScope.bookTopGroups.size()}"/>
                                             <c:set var="topBook" scope="page" value="${sessionScope.bookTopGroups.get(i-1)}"/>
                                             <div class="item <c:if test="${i==1}">active</c:if>">
                                                 <a href="/bookInfo.do?articul=${topBook.id}">

@@ -1,5 +1,7 @@
 package ua.nure.uvarov.web.controller;
 
+import org.apache.log4j.Logger;
+import ua.nure.uvarov.constants.Messages;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.entity.UserRole;
@@ -20,26 +22,31 @@ import java.util.Map;
 
 @WebServlet("/cabinet.do")
 public class CabinetController extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(CabinetController.class);
     private Map<UserRole,PersonalCabinetHandler> handlerContainer;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info(Messages.LOG_GET +"/cabinet.do");
         if (req.getSession().getAttribute(Parameters.S_USER) == null) {
             throw new NotFoundException();
         } else {
             User user = (User)req.getSession().getAttribute(Parameters.S_USER);
             handlerContainer.get(user.getRole()).execute(req,resp);
+            LOG.info(Messages.LOG_FORWARD + "/cabinet.jsp");
             req.getRequestDispatcher("WEB-INF/jsp/cabinet.jsp").forward(req, resp);
         }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info(Messages.LOG_POST +"/cabinet.do");
         if (req.getSession().getAttribute(Parameters.S_USER) == null) {
             throw new NotFoundException();
         } else {
-
+            LOG.info(Messages.LOG_FORWARD +"/cabinet.do");
             req.getRequestDispatcher("WEB-INF/jsp/cabinet.jsp").forward(req, resp);
 
         }

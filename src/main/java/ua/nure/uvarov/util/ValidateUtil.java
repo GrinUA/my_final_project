@@ -10,10 +10,12 @@ import ua.nure.uvarov.entity.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ValidateUtil {
 
@@ -78,7 +80,21 @@ public class ValidateUtil {
                 && !validateByRegex(filterParams.getGenreId(), Regexes.BOOK_GENRE_PATTERN)) {
             errors.put(Parameters.GENRE, Messages.INVALID);
         }
-        if (filterParams.getPublicationDate()!=null && !filterParams.getPublicationDate().isEmpty()) {
+        if (filterParams.getOrderBy() != null
+                && !filterParams.getOrderBy().isEmpty()
+                && !(filterParams.getOrderBy().equals("ASC") || filterParams.getOrderBy().equals("DESC"))) {
+            errors.put(Parameters.ORDER_BY, Messages.INVALID);
+        }
+        if (filterParams.getSortBy() != null
+                && !filterParams.getSortBy().isEmpty()
+                && (!Arrays.stream(filterParams.getClass().getDeclaredFields())
+                .map(field -> field.getName())
+                .collect(Collectors.toList())
+                .contains(filterParams.getSortBy())))
+        {
+            errors.put(Parameters.SORT_BY, Messages.INVALID);
+        }
+        if (filterParams.getPublicationDate() != null && !filterParams.getPublicationDate().isEmpty()) {
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat format = new SimpleDateFormat(pattern);
             try {

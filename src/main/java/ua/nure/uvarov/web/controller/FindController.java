@@ -1,5 +1,7 @@
 package ua.nure.uvarov.web.controller;
 
+import org.apache.log4j.Logger;
+import ua.nure.uvarov.constants.Messages;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.entity.UserRole;
@@ -19,11 +21,13 @@ import java.util.Map;
 
 @WebServlet("/find.do")
 public class FindController extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(FindController.class);
     private Map<UserRole, FindHandler> handlerContainer;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info(Messages.LOG_GET + "/find.do");
         if (req.getSession().getAttribute(Parameters.S_USER) == null) {
             throw new NotFoundException();
         } else {
@@ -34,6 +38,7 @@ public class FindController extends HttpServlet {
     }
         @Override
         public void init (ServletConfig config) throws ServletException {
+            LOG.info("Init -> /find.do");
             handlerContainer = new HashMap<>();
             handlerContainer.put(UserRole.ADMIN, new AdminCabinetFindHandler());
         }

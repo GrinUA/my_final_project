@@ -9,5 +9,11 @@ public class Messages {
     public static final String BLOCKED_USER = "U was blocked";
 
     public static final String INVALID = "Invalid";
+    public static final String LOG_GET = "GET -> ";
+    public static final String LOG_POST = "POST -> ";
+    public static final String LOG_REDIRECT = "redirect -> ";
+    public static final String LOG_FORWARD = "forward -> ";
+
+
 
 }

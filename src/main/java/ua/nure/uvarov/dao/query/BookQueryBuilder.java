@@ -58,13 +58,13 @@ public class BookQueryBuilder {
                 sb.append(" ( ").append(" genreId=").append(params.getGenreId()).append(" )");
             }
 
-           /* if (params.getOrderBy() != null && !params.getOrderBy().isEmpty()) {
-                if (!params.isAsc()) {
-                    sb.append(" ORDER BY ").append(params.getOrderBy()).append(" ASC ");
+            if (params.getSortBy() != null && !params.getSortBy().isEmpty()) {
+                if ("DESC".equals(params.getOrderBy())) {
+                    sb.append(" ORDER BY ").append(params.getSortBy()).append(" DESC ");
                 } else {
-                    sb.append(" ORDER BY ").append(params.getOrderBy()).append(" DESC ");
+                    sb.append(" ORDER BY ").append(params.getSortBy()).append(" ASC ");
                 }
-            }*/
+            }
         }
         query = sb.toString();
     }

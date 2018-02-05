@@ -1,5 +1,7 @@
 package ua.nure.uvarov.web.controller;
 
+import org.apache.log4j.Logger;
+import ua.nure.uvarov.constants.Messages;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.OrderStatus;
 import ua.nure.uvarov.entity.User;
@@ -21,10 +23,13 @@ import java.util.Map;
 
 @WebServlet("/orderStatus.do")
 public class OrderStatusChangeController extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(OrderStatusChangeController.class);
+
     private Map<OrderStatus, OrderStatusChangeHandler> handlerContainer;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info(Messages.LOG_POST + "/orderStatus.do");
         User user = (User) (req.getSession().getAttribute(Parameters.S_USER));
         if (user.getRole().equals(UserRole.CLIENT)) {
             if (req.getParameter(Parameters.ORDER_STATUS).equals(OrderStatus.CANCELED.toString())) {
@@ -40,6 +45,7 @@ public class OrderStatusChangeController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        LOG.info("Init -> /orderStatus.do");
         handlerContainer = new HashMap<>();
         handlerContainer.put(OrderStatus.CLOSED, new OrderStatusChangeToClose());
         handlerContainer.put(OrderStatus.OPEN, new OrderStatusChangeToOpen());

@@ -5,14 +5,18 @@ public class FilterParams {
     private String author;
     private String edition;
     private String publicationDate;
+    private String orderBy;
+    private String sortBy;
 
     private String genreId;
 
-    public FilterParams(String name, String author, String edition, String publicationDate, String genreId) {
+    public FilterParams(String name, String author, String edition, String publicationDate, String orderBy, String sortBy, String genreId) {
         this.name = name;
         this.author = author;
         this.edition = edition;
         this.publicationDate = publicationDate;
+        this.orderBy = orderBy;
+        this.sortBy = sortBy;
         this.genreId = genreId;
     }
 
@@ -30,6 +34,14 @@ public class FilterParams {
 
     public String getPublicationDate() {
         return publicationDate;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public String getSortBy() {
+        return sortBy;
     }
 
     public String getGenreId() {

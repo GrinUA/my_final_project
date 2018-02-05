@@ -1,5 +1,8 @@
 package ua.nure.uvarov.web.controller;
 
+import org.apache.log4j.Logger;
+import ua.nure.uvarov.constants.Messages;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +16,17 @@ import java.io.OutputStream;
 
 @WebServlet("/images/*")
 public class ImageController extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(ImageController.class);
 
     private String pathToImages;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("image/jpeg");
 
+        resp.setContentType("image/jpeg");
         String fileName = req.getPathInfo();
+        LOG.info(Messages.LOG_GET + "image - " + fileName);
+
         File file = new File(pathToImages, fileName);
         BufferedImage bufferedImage = ImageIO.read(file);
 
@@ -39,6 +45,7 @@ public class ImageController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        LOG.info(" Init -> /images");
         pathToImages = getServletContext().getInitParameter("images_path");
     }
 }
