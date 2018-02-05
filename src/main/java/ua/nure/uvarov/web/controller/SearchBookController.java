@@ -27,17 +27,19 @@ public class SearchBookController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("Call -> GET /searchBook.do");
-        Map<String, String> errorMap = new HashMap<>();
 
-        FilterParams filterParams = map(req, errorMap);
-        errorMap.putAll(new ValidateUtil().validateFilterParams(filterParams));
+        FilterParams filterParams = map(req);
+        Map<String, String> errorMap =
+                new HashMap<>(new ValidateUtil().validateFilterParams(filterParams));
 
 
         if (errorMap.isEmpty()) {
             List<BookGroup> bookGroups = bookService.getBookGroup(filterParams);
             req.setAttribute(Parameters.BOOK_GROUP_LIST, bookGroups);
+            req.setAttribute(Parameters.FILTER_PARAMS, filterParams);
             req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req, resp);
         } else {
+            req.getSession().setAttribute(Parameters.FILTER_PARAMS, filterParams);
             req.getSession().setAttribute(Parameters.ERRORS, errorMap);
             resp.sendRedirect("/main.do");
         }
@@ -51,16 +53,19 @@ public class SearchBookController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        LOG.info("Init -> /searchBook.do");
         bookService = (BookService) getServletContext().getAttribute(Parameters.BOOK_SERVICE);
     }
 
 
-    private FilterParams map(HttpServletRequest req, Map<String, String> errorMap) {
+    private FilterParams map(HttpServletRequest req) {
         return new FilterParams(
                 req.getParameter(Parameters.NAME),
                 req.getParameter(Parameters.AUTHOR),
                 req.getParameter(Parameters.EDITION),
                 req.getParameter(Parameters.PUBLICATION_DATE),
+                req.getParameter(Parameters.ORDER_BY),
+                req.getParameter(Parameters.SORT_BY),
                 req.getParameter(Parameters.GENRE)
         );
     }

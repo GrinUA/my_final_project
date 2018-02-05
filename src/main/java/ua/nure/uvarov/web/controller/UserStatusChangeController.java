@@ -1,5 +1,7 @@
 package ua.nure.uvarov.web.controller;
 
+import org.apache.log4j.Logger;
+import ua.nure.uvarov.constants.Messages;
 import ua.nure.uvarov.constants.Parameters;
 import ua.nure.uvarov.entity.User;
 import ua.nure.uvarov.services.UserService;
@@ -13,22 +15,30 @@ import java.io.IOException;
 
 @WebServlet("/userStatus.do")
 public class UserStatusChangeController extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(UserStatusChangeController.class);
+
     private UserService userService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getParameter(Parameters.USER_STATUS).equals(Parameters.USER_BLOCK)){
+        LOG.info(Messages.LOG_POST + "/userStatus.do");
+
+        if (req.getParameter(Parameters.USER_STATUS).equals(Parameters.USER_BLOCK)) {
             userService.block(req.getParameter(Parameters.EMAIL));
         }
-        if(req.getParameter(Parameters.USER_STATUS).equals(Parameters.USER_UNBLOCK)){
+        if (req.getParameter(Parameters.USER_STATUS).equals(Parameters.USER_UNBLOCK)) {
             userService.unblock(req.getParameter(Parameters.EMAIL));
         }
         req.setAttribute(Parameters.ACTIVE_TAB, Parameters.TAB_USERS);
-            resp.sendRedirect("cabinet.do?activeTab=usersTab");
+
+        LOG.info(Messages.LOG_REDIRECT + "/cabinet.do?activeTab=usersTab");
+
+        resp.sendRedirect("cabinet.do?activeTab=usersTab");
     }
 
     @Override
     public void init() throws ServletException {
+        LOG.info("Init -> /userStatus.do");
         userService = (UserService) getServletContext().getAttribute(Parameters.USER_SERVICE);
     }
 }

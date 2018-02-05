@@ -92,6 +92,9 @@ public class Parameters {
 
     public static final String BOOK_GROUP_TOP_LIST = "bookTopGroups";
     public static final String GENRE_LIST = "genres";
+    public static final String FILTER_PARAMS = "filterParams";
+    public static final String ORDER_BY = "orderBy";
+    public static final String SORT_BY = "sortBy";
 
 
 

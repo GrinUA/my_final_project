@@ -31,7 +31,6 @@ public class PermissionFilter implements Filter {
         String role = Parameters.ROLE_UNKNOWN;
         URL url = new URL(httpRequest.getRequestURL().toString());
         String realPath = url.getPath();
-        System.out.println(realPath);
         String important = realPath.substring(httpRequest.getContextPath().length(), realPath.length());
         if (urlsSet.contains(important)) {
             if (user != null) {
