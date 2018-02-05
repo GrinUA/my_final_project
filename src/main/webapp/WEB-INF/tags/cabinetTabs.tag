@@ -7,7 +7,7 @@
         <c:if test="${requestScope.activeTab == 'usersTab'}">
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=booksTab">Books</a></li>
-            <li role="presentation"><a href="cabinet.do?activeTab=genre">Add new genre</a>
+            <li role="presentation"><a href="createBook.do">Create book</a>
             </li>
             <c:choose>
                 <c:when test="${not empty userList}">
@@ -65,7 +65,7 @@
         <c:if test="${requestScope.activeTab == 'booksTab'}">
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation" class="active"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
-            <li role="presentation"><a href="cabinet.do?activeTab=genre">Add new genre</a></li>
+            <li role="presentation"><a href="createBook.do">Create book</a>
             <c:choose>
                 <c:when test="${not empty bookList}">
                     <%--<t:pages />--%>
@@ -103,7 +103,7 @@
         <c:if test="${requestScope.activeTab == 'genre'}">
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Users</a></li>
             <li role="presentation"><a href="cabinet.do?activeTab=usersTab">Books</a></li>
-            <li role="presentation" class="active"><a href="cabinet.do?activeTab=genre">Add new genre</a>
+            <li role="presentation"><a href="createBook.do">Create book</a>
             </li>
             <form action=""add new genre></form>
         </c:if>

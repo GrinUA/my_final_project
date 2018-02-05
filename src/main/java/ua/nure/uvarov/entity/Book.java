@@ -4,7 +4,7 @@ package ua.nure.uvarov.entity;
 
 public class Book {
     private int id;
-    private int groupId;
+    private String groupId;
     private boolean available;
 
     public int getId() {
@@ -15,11 +15,11 @@ public class Book {
         this.id = id;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 

@@ -72,6 +72,8 @@ public class Parameters {
 
     public static final String DEFAULT_IMAGE_VALUE = "default.jpg";
     public static final int ONE_DAY = 86400000;
+    public static final long ONE_MONTH =  2592000000L;
+
     public static final double PERCENT = 20;
 
     public static final String ALL_BOOK_COUNT = "allBookCount";

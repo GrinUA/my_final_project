@@ -18,6 +18,7 @@ public class OrderStatusChangeToOpen implements OrderStatusChangeHandler{
         Order order = orderService.getOrderByGuid(req.getParameter(Parameters.GUID));
         order.setOrderDate(new Date(System.currentTimeMillis()));
         order.setStatus(OrderStatus.OPEN);
+        order.setExpectedDate(new Date(System.currentTimeMillis() + Parameters.ONE_MONTH));
         orderService.updateOrder(order);
     }
 }

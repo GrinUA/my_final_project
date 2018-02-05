@@ -24,7 +24,6 @@ public class BookEditBeanRowMapper implements BeanRowMapper<BookGroup> {
         this.genreObjectFunc = getGenreObjectFunc;
     }
     public BookEditBeanRowMapper(){
-
     }
     @Override
     public BookGroup mapRow(HttpServletRequest request) {

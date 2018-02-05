@@ -13,7 +13,7 @@ public final class MySQL {
     public static final String FIND_GENRE_BY_ID = "SELECT * FROM genres WHERE id = ?";
     public static final String FIND_GENRE_BY_NAME = "SELECT * FROM genres WHERE name = ?";
 
-    public static final String CREATE_BOOK = "insert into books (id,groupid,available) values (DEFAULT,?,DEFAULT);";
+    public static final String CREATE_BOOK = "insert into books (id,groupId,available) values (DEFAULT,?,1);";
     public static final String FIND_BOOK_GROUPS_BY_NAME = "SELECT * FROM book_groups WHERE name = ?";
     public static final String FIND_BOOK_GROUPS_BY_AUTHOR = "SELECT * FROM book_groups WHERE author = ?";
     public static final String FIND_BOOK_GROUPS_GENRE = "SELECT * FROM book_groups WHERE genreId = ?";

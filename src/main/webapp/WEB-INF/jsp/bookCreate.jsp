@@ -29,15 +29,18 @@
                             <p>Author: <input name="author" type="text" class="form-control" placeholder="Author" required=""></p>
                             <p>Edition: <input name="edition" type="text" class="form-control" placeholder="Edition" required=""></p>
                             <p>Publication date: <input name="publicationDate" type="date" class="form-control" required=""></p>
-                            <p>Genre: <select name="genre" class="form-control">
-
-                            </select> </p>
+                            <p>Genre: <select class="form-control"  name="genreName">
+                                    <option  selected value="">Select Genre</option>
+                                    <c:forEach items="${genres}" var="genre">
+                                        <option value="${genre.name}">${genre.name}</option>
+                                    </c:forEach>
+                                </select></div>
+                           </p>
                             <p>Price: <input name="price" type="text" class="form-control" placeholder="Price" required=""></p>
-                            <h3>DESCRIPTION</h3>
+                        <p><input name="count" type="number" class="form-control" placeholder="Amount" required=""></p>
+                        <h3>DESCRIPTION</h3>
                             <p><i><input name="description" type="text" class="form-control" placeholder="Description" required=""></i></p>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
-                            <!-- Split button -->
-                        </div>
+                             <input class="btn btn-lg btn-primary btn-block" type="submit">Create</input>
                     </form>
                 </div>
             </div>

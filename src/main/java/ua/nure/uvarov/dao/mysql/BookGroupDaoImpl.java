@@ -15,6 +15,7 @@ import ua.nure.uvarov.transaction.ThreadLockHandler;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 public class BookGroupDaoImpl implements BookGroupDao {
@@ -83,11 +84,17 @@ public class BookGroupDaoImpl implements BookGroupDao {
 
     @Override
     public int create(BookGroup entity) {
+     throw new UnsupportedOperationException();
+    }
+    public String createBookGroup(BookGroup entity) {
         Connection connection = ThreadLockHandler.getConnection();
         try (PreparedStatement st = connection.prepareStatement(MySQL.CREATE_BOOK_GROUP)) {
+            entity.setId(UUID.randomUUID().toString());
             new BookGroupRowMapper().unMap(st, entity);
             st.executeUpdate();
-            return 0;
+            ResultSet resultSet = st.getGeneratedKeys();
+            resultSet.next();
+            return entity.getId();
         } catch (SQLException e) {
             throw new DataBaseException(e);
         }

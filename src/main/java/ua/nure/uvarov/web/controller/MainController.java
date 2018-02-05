@@ -12,8 +12,12 @@ import java.io.IOException;
 public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("books.do").include(req,resp);
-        req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req,resp);
+        req.getRequestDispatcher("books.do").include(req, resp);
+
+        /////!!!!!
+        req.getSession().setAttribute("language", req.getParameter("lang"));
+
+        req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req, resp);
     }
 
     @Override

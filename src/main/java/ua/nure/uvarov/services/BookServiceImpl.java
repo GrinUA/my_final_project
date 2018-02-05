@@ -48,20 +48,27 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+    @Override
+    public int createBookToGroup(int count, String groupId) {
+        return dbManager.execute(() -> {
+            for (int i = 0; i < count; i++) {
+                Book book = new Book();
+                book.setGroupId(groupId);
+                bookDao.create(book);
+            }
+                return count;});
+    }
+
     /* @Override
      public BookGroup getBookGroup(int id) {
          return dbManager.execute(() -> bookGroupDao.getById(id));
      }
  */
     @Override
-    public int createBookGroup(BookGroup bookGroup) {
-        return dbManager.execute(() -> bookGroupDao.create(bookGroup));
+    public String createBookGroup(BookGroup bookGroup) {
+        return dbManager.execute(() -> bookGroupDao.createBookGroup(bookGroup));
     }
 
-   /* @Override
-    public BookGroup getBookGroup(String guid) {
-        return dbManager.execute(() -> bookGroupDao.getBookGroupByGuid(guid));
-    }*/
 
     @Override
     public List<BookGroup> getBookGroups() {
@@ -75,6 +82,9 @@ public class BookServiceImpl implements BookService {
 
                 bookGroupDao.updateBook(bookGroup));
     }
+
+
+
 
     public BookGroup getBook(HttpServletRequest request) {
         BeanRowMapper bookGroupRowMapper = new BookEditBeanRowMapper();

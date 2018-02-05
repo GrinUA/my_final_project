@@ -20,6 +20,7 @@ public class BookDaoImpl implements BookDao {
 
     }
 
+
     @Override
     public List<Book> getBooksByGroup(int id) {
         List<Book> list;
@@ -33,7 +34,7 @@ public class BookDaoImpl implements BookDao {
                 resultSet.next();
             Book book = new Book();
             book.setId(resultSet.getInt(Parameters.ID));
-            book.setGroupId(resultSet.getInt(Parameters.GROUP_ID));
+            book.setGroupId(resultSet.getString(Parameters.GROUP_ID));
             book.setAvailable(resultSet.getInt(Parameters.AVAILABLE)==1);
 
             list.add(book);
@@ -68,7 +69,7 @@ public class BookDaoImpl implements BookDao {
             resultSet.next();
             Book book = new Book();
             book.setId(resultSet.getInt(Parameters.ID));
-            book.setGroupId(resultSet.getInt(Parameters.GROUP_ID));
+            book.setGroupId(resultSet.getString(Parameters.GROUP_ID));
             book.setAvailable(resultSet.getInt(Parameters.AVAILABLE)==1);
             return book;
         } catch (SQLException e) {
@@ -85,7 +86,7 @@ public class BookDaoImpl implements BookDao {
         {
             Connection connection = ThreadLockHandler.getConnection();
             try (PreparedStatement st = connection.prepareStatement(MySQL.CREATE_BOOK, Statement.RETURN_GENERATED_KEYS)) {
-                st.setInt(1, book.getGroupId());
+                st.setString(1, book.getGroupId());
                 st.executeUpdate();
                 ResultSet resultSet = st.getGeneratedKeys();
                 resultSet.next();
@@ -96,6 +97,8 @@ public class BookDaoImpl implements BookDao {
             }
         }
     }
+
+
 
 
     public boolean updateStatus (boolean available, int id) {

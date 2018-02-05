@@ -14,8 +14,8 @@ public interface BookService {
     Book getById(int id);
     BookGroup getBookByParameters(BookParams bookParams);
 
-
-    int createBookGroup(BookGroup bookGroup);
+    int createBookToGroup(int count, String groupId);
+   String createBookGroup(BookGroup bookGroup);
     BookGroup getBookGroup(String guid);
     List<BookGroup> getBookGroups();
     boolean updateBookGroup(BookGroup bookGroup);

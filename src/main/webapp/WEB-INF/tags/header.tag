@@ -1,6 +1,5 @@
 <%@ tag body-content="empty" language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
-
 <header id="header">
     <nav class="navbar navbar-inverse navbar-fixed-top text-20" role="navigation">
         <div class="container">
@@ -28,7 +27,7 @@
                             <a href="register.do">Register</a>
                         </li>
                         <li>
-                            <a href="login.do">Login</a>
+                            <a href="login.do"><fmt:message key="login"/> </a>
                         </li>
                     </c:otherwise>
                     </c:choose>

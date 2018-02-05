@@ -3,7 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <%@ include file="/WEB-INF/jspf/directive/head.jspf" %>
 
