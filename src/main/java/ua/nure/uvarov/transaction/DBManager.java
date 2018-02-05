@@ -25,7 +25,7 @@ public class DBManager {
             return value;
         } catch (Throwable e) {
             tryToRollback(con);
-            throw new AppException(e);// AppException
+            throw new AppException(e);
         } finally {
             ThreadLockHandler.setConnection(null);
             tryToClose(con);

@@ -23,12 +23,12 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     </error-page>
     <error-page>
         <exception-type>ua.nure.uvarov.exceptions.NotFoundException</exception-type>
-        <location>/404.jsp</location>
+        <location>/403.jsp</location>
     </error-page>
 
     <filter>
-        <filter-name>PermissionFilter</filter-name> <!-- mandatory -->
-        <filter-class>ua.nure.uvarov.web.filter.PermissionFilter</filter-class> <!-- mandatory -->
+        <filter-name>PermissionFilter</filter-name>
+        <filter-class>ua.nure.uvarov.web.filter.PermissionFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>PermissionFilter</filter-name>
@@ -50,7 +50,5 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     <context-param>
         <param-name>accessFile_path</param-name>
         <param-value>access.xml</param-value>
-
-
     </context-param>
 </web-app>

@@ -45,7 +45,7 @@
                             </select>
                         </div>
                         </p>
-                        <p>Price: <input name="price" type="text" class="form-control" placeholder="Price"
+                        <p>Price: <input name="price" type="number" class="form-control" placeholder="Price"
                                          value="${bookInfo.price}" required=""></p>
                         <h3>DESCRIPTION</h3>
                         <p><i><input name="description" type="text" class="form-control" placeholder="Description"
@@ -60,6 +60,7 @@
     </div>
     <div class="col-md-2"></div>
 </div>
-</div>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
 </body>
 </html>
