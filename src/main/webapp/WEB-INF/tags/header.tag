@@ -10,21 +10,29 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><fmt:message key="language"/> <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="locale?lang=en">English</a></li>
+                            <li><a href="locale?lang=ru">Русский</a></li>
+                        </ul>
+                    </div></li>
                     <c:choose>
                     <c:when test="${not empty sessionScope.s_user}">
+
                         <li
                                 class="login"><a>${sessionScope.s_user.firstName}<i class="fa fa-user"></i></a>
                         </li>
                         <li
-                                class="login"><a href="cabinet.do?activeTab=default">Cabinet<i class="fa fa-user"></i></a>
+                                class="login"><a href="cabinet.do?activeTab=default"><fmt:message key="cabinet"/> <i class="fa fa-user"></i></a>
                         </li>
                         <li>
-                            <a href="logout.do"><i class="fa fa-lock"></i> LogOut</a>
+                            <a href="logout.do"><i class="fa fa-lock"></i> <fmt:message key="logout"/> </a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li>
-                            <a href="register.do">Register</a>
+                            <a href="register.do"><fmt:message key="register"/> </a>
                         </li>
                         <li>
                             <a href="login.do"><fmt:message key="login"/> </a>

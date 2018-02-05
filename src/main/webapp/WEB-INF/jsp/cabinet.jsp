@@ -9,7 +9,7 @@
 <t:header/>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">   <img class="img-rounded img-responsive" src="images/default.jpg?owner=user" alt="">
+        <div class="col-md-2">   <img class="img-rounded img-responsive" src="images/user.jpg?owner=user" alt="">
             <h4> ${sessionScope.s_user.firstName}</h4>
             <h4> ${sessionScope.s_user.lastName}</h4>
             <h6> ${sessionScope.s_user.email}</h6></div>

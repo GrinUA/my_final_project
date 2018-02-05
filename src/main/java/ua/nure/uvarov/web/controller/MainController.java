@@ -25,12 +25,7 @@ public class MainController extends HttpServlet {
         req.getSession().removeAttribute(Parameters.FILTER_PARAMS);
         LOG.info(Messages.LOG_FORWARD + "/index.jsp");
         req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req, resp);
-        req.getRequestDispatcher("books.do").include(req, resp);
 
-        /////!!!!!
-        req.getSession().setAttribute("language", req.getParameter("lang"));
-
-        req.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(req, resp);
     }
 
     @Override
