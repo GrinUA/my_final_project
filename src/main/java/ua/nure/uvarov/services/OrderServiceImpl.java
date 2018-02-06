@@ -75,7 +75,6 @@ public class OrderServiceImpl implements OrderService {
             else {
                     map.put(bookGroup.getName(), list.get(i).getPenalty());
                 }
-
                 }
 
             return map; });}

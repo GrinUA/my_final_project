@@ -28,7 +28,6 @@ public class LoginController extends HttpServlet {
     public void init() throws ServletException {
         LOG.info("Init -> /login.do");
         loginService = new LoginService();
-
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
